@@ -1,0 +1,23 @@
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1"
+	 id="svg2" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" sodipodi:docname="F_icon_reversed.svg" sodipodi:version="0.32" inkscape:version="0.46" inkscape:output_extension="org.inkscape.output.svg.inkscape"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="128px" height="128px"
+	 viewBox="-0.5 0.5 128 128" enable-background="new -0.5 0.5 128 128" xml:space="preserve">
+<defs>
+	
+	
+		<inkscape:perspective  inkscape:vp_x="0 : 64 : 1" inkscape:vp_y="0 : 1000 : 0" id="perspective20" inkscape:vp_z="128 : 64 : 1" sodipodi:type="inkscape:persp3d" inkscape:persp3d-origin="64 : 42.666667 : 1">
+		</inkscape:perspective>
+</defs>
+<sodipodi:namedview  borderopacity="1.0" showgrid="false" inkscape:cx="64" inkscape:zoom="3.609375" inkscape:cy="64" objecttolerance="10.0" id="base" gridtolerance="10.0" guidetolerance="10.0" bordercolor="#666666" pagecolor="#ffffff" inkscape:window-width="644" inkscape:window-height="669" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:current-layer="svg2" inkscape:window-x="25" inkscape:window-y="25">
+	</sodipodi:namedview>
+<g id="Layer_4">
+	<g id="g8">
+	</g>
+</g>
+<g id="Layer_3">
+	<path id="path13" fill="#3B5998" d="M71.377,115.741H50.204V64.497H39.625V46.836h10.578V36.233
+		c0-14.407,5.973-22.975,22.943-22.975h14.127v17.662h-8.83c-6.605,0-7.043,2.469-7.043,7.074l-0.023,8.839h15.998l-1.873,17.661
+		H71.377V115.741z"/>
+</g>
+</svg>

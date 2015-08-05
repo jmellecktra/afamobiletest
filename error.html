@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, height=device-height,initial-scale=1, user-scalable=no" />
+    <title>AFA</title>
+    <link rel="stylesheet" href="includes/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="includes/css/web.css" />
+    <script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript" src="includes/js/libreria.js"></script>
+</head>
+
+<body onload="setAppVersion()">
+    <div class="container containerError">
+        <img src="img/material/Logo.svg" alt="afa" class="cssLogoAfaError" />
+        <div class="divDescripcionError" style="font-size: 1.2em;">
+            <span>No est&aacute; disponible el servicio en este momento. Compruebe su conexi&oacute;n e intente nuevamente.</span>
+			<div id="update_icon_container" style="margin-top: 20px;">
+				<img src="img/material/icono-actualizar.svg" class="cssCalendario" style="cursor:pointer;" onclick="tryUpdate();" />&nbsp;
+				&nbsp;<span onclick="tryUpdate();" style="cursor:pointer;padding: 3px;border: 1px black solid;border-radius: 3px;">Intentar nuevamente</span>
+			</div><br /> <br />
+			<div style="font-size: 0.8em;" id="app_version"></div>
+        </div>
+		<div id="error_code_div" style="display: none; position: absolute; left: 20px; bottom: 20px; font-size: 0.7em;"></div>
+    </div>
+
+    <!--    Inicio Ventana alerta-->
+    <div id="divVentanaAlertaContenedor" style="display: none;">
+        <div class="center_box">
+            <div id="divVentanaTitulo">
+
+            </div>
+            <div id="divVentanaDescripcio">
+
+            </div>
+            <div>
+                <input type="button" onclick="btnCerrarAlerta();" value="Cerrar">
+            </div>
+        </div>
+    </div>
+    <!--    Fin Ventana alerta-->
+	<script type="text/javascript">
+		function tryUpdate() {
+			window.location.href = "index.html";
+		}
+
+		function setAppVersion() {
+			var div = document.getElementById('app_version');
+			div.innerHTML = '<b>AFA Móvil</b>, versión: ' + appVersion;
+
+			// Define if its device is a mobile
+			if (navigator.userAgent.match(/(Mobile|iPhone|iPod|iPad|Android|BlackBerry)/)) {
+				document.isIndex = true;
+				document.addEventListener("deviceready", mobileEventsHandler, false);
+			}
+		}
+
+		function getParam(param) { //$_GET(param)
+			var url = document.URL;
+			url = String(url.match(/\?+.+/));
+			url = url.replace("?", "");
+			url = url.split("&");
+
+			/*
+			 * 0 = parametro
+			 * 1 = valor
+			 * Si el parámetro existe devolver su valor
+			*/
+			x = 0;
+			while (x < url.length) {
+				p = url[x].split("=");
+				if (p[0] == param) {
+					return decodeURIComponent(p[1]);
+				}
+				x++;
+			}
+			return '';
+		}
+
+		var id = parseInt(getParam('id'));
+		if (id > 0) {
+			var error_div = document.getElementById('error_code_div');
+			error_div.innerHTML = '#' + id;
+			error_div.style.display = 'block';
+		}
+
+	   /* Error codes table:
+	    * -1 : No important error
+	    * 50 : unknown ajax call error
+		* 100: Not connect: Verify Network. ajax call error
+		* 110: Requested page not found [404]. ajax call error
+		* 120: Internal Server Error [500]. ajax call error
+		* 130: Requested JSON parse failed. ajax call error
+		* 140: Time out error. ajax call error
+		* 150: Ajax request aborted. ajax call error
+		* 160: Uncaught Error. ajax call error
+		* 1000: Load storage error
+		* 2000: Unknow update
+		* 3000: Empty response
+		* 5000: Update loading Timeout
+		* 6000: Register mobile to cloud error
+		* 7000: Webservice device register error
+		* 8000: indexCotizacionDestacadaSeleccionada wrong
+		* 9000: Start up application error
+		* 9999: Backbutton event error
+		*/
+	</script>
+</body>
+
+</html>
