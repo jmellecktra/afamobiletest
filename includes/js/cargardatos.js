@@ -272,15 +272,14 @@ function CargarResultadoAuditoriaJavascript(pXML) {
 
         obj.fecha = $(this).find('fecha').text();
 		if (!obj.fecha || 
-			(obj.fecha && obj.fecha.length == 0) {
-//			(obj.fecha && obj.fecha.length > 0 && !isValidDate(obj.fecha))) {
+			(obj.fecha && obj.fecha.length == 0) ) {
 			processError('', 20002, '');
 			return;
 		}
 
 		obj.hora = $(this).find('hora').text();
 		if (!obj.hora || 
-			(obj.hora && obj.hora.length == 0) {
+			(obj.hora && obj.hora.length == 0) ) {
 			processError('', 20003, '');
 			return;
 		}
