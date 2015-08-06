@@ -192,7 +192,7 @@ function defineLoadUpdates() {
 			case 1: isCargarCotizaciones = update; break;
 			case 2: listaNovedades = update; break;
 			case 3: listaInformes = update; break;
-			default: processError('', 2000, ''); // unknow update
+			default: processError('', 20004, ''); // unknow update
 		}
 	}
 }
@@ -266,7 +266,7 @@ function CargarResultadoAuditoriaJavascript(pXML) {
         var obj = new modificacionesTabla();
         obj.codigoTabla = parseInt($(this).find('codigoTabla').text());
 		if (obj.codigoTabla != 1 && obj.codigoTabla != 2 && obj.codigoTabla != 3) {
-			processError('', 2000, '');
+			processError('', 20001, '');
 			return;
 		}
 
@@ -274,7 +274,7 @@ function CargarResultadoAuditoriaJavascript(pXML) {
 		if (!obj.fecha || 
 			(obj.fecha && obj.fecha.length == 0) || 
 			(obj.fecha && obj.fecha.length > 0 && !isValidDate(obj.fecha))) {
-			processError('', 2000, '');
+			processError('', 20002, '');
 			return;
 		}
 
@@ -282,7 +282,7 @@ function CargarResultadoAuditoriaJavascript(pXML) {
 		if (!obj.hora || 
 			(obj.hora && obj.hora.length == 0) || 
 			(obj.hora && obj.hora.length > 0 && !isValidTime(obj.hora))) {
-			processError('', 2000, '');
+			processError('', 20003, '');
 			return;
 		}
 
