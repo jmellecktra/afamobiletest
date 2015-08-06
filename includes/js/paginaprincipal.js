@@ -445,7 +445,7 @@ function CargarCotizacionesHistoricaHtml(pIndex) {
         resultadoDiv += '<div id="divParteFijaCotizacionHistorica" >'; // div parte fija
         resultadoDiv += '<div class="row">';
         resultadoDiv += '<div class="col-xs-11 colHistoricoTitulo">';
-        resultadoDiv += 'Cotizaci&#243;n hist&#243;rica: ' + cotizacionesDestacada[pIndex].descripcionProducto.toUpperCase();
+        resultadoDiv += '&#218;ltimas cotizaciones: ' + cotizacionesDestacada[pIndex].descripcionProducto.toUpperCase();
         resultadoDiv += '</div>';
         //
         resultadoDiv += '<div class="col-xs-1 cssAmpliarAchicar" >'; // onclick="onclickFullScreenCotizacionesHistorica()"

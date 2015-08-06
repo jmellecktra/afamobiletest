@@ -40,7 +40,7 @@ function CargarCotizacionesHistoricaFullscreenHtml(pIndex) {
         if (cotizacionesDestacada[pIndex].listaHistorico.length > 0) {
             resultadoDiv += '<div id="divRowTodosHistoricoCotizacionesTitulo" class="row">';
             resultadoDiv += '<div class="col-xs-10 colHistoricoTitulo">';
-            resultadoDiv += 'Cotizaci&#243;n hist&#243;rica: ' + cotizacionesDestacada[pIndex].descripcionProducto.toUpperCase();
+            resultadoDiv += '&#218;ltimas cotizaciones: ' + cotizacionesDestacada[pIndex].descripcionProducto.toUpperCase();
             resultadoDiv += '</div>';
 
             resultadoDiv += '<div class="col-xs-2 cssAmpliarAchicar" >';
