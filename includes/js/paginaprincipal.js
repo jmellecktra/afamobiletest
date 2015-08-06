@@ -233,6 +233,7 @@ function CargarCotizacionesDestacadaHtml() {
         resultadoDiv += '<div class="accordion-body collapse" id="collapse' + index + '" style="height: 0px;">';
         resultadoDiv += '<div class="accordion-inner">';
         // detalle
+		/*
         if (this.listaDetalle.length > 0) {
             // Encabezado detalle
             resultadoDiv += '<div class="row">';
@@ -251,23 +252,71 @@ function CargarCotizacionesDestacadaHtml() {
         }
         for (var iDetalle = 0; iDetalle < this.listaDetalle.length; iDetalle++) {
             var strHtmlColorFondo = '';
-            if (iDetalle % 2 != 0) {
-                strHtmlColorFondo = ' cssDetalleImpar ';
-            }
-            //if (this.codigoProducto == this.listaDetalle[iDetalle].codigoProducto) {
-                resultadoDiv += '<div class="row cssDetalle' + strHtmlColorFondo + '">';
-                resultadoDiv += '<div class="col-xs-4 colDetalleDescripcionPuerto">';
-                resultadoDiv += this.listaDetalle[iDetalle].descripcionPuerto;
-                resultadoDiv += '</div>';
-                resultadoDiv += '<div class="col-xs-4 colDetallePrecio">';
-
-                resultadoDiv += this.listaDetalle[iDetalle].abreviaturaMoneda + ' ' + this.listaDetalle[iDetalle].valorString;
-                resultadoDiv += '</div>';
-                resultadoDiv += '<div class="col-xs-4 colDetalleObservacion">';
-                resultadoDiv += this.listaDetalle[iDetalle].observacion;
-                resultadoDiv += '</div>';
-                resultadoDiv += '</div>';
-            //}
+            if(this.codigoProducto==this.listaDetalle[iDetalle].codigoProducto){
+				if (iDetalle % 2 != 0) {
+					strHtmlColorFondo = ' cssDetalleImpar ';
+				}
+				resultadoDiv += '<div class="row cssDetalle' + strHtmlColorFondo + '">';
+				resultadoDiv += '<div class="col-xs-4 colDetalleDescripcionPuerto">';
+				resultadoDiv += this.listaDetalle[iDetalle].descripcionPuerto;
+				resultadoDiv += '</div>';
+				resultadoDiv += '<div class="col-xs-4 colDetallePrecio">';
+	
+				resultadoDiv += this.listaDetalle[iDetalle].abreviaturaMoneda + ' ' + this.listaDetalle[iDetalle].valorString;
+				resultadoDiv += '</div>';
+				resultadoDiv += '<div class="col-xs-4 colDetalleObservacion">';
+				resultadoDiv += this.listaDetalle[iDetalle].observacion;
+				resultadoDiv += '</div>';
+				resultadoDiv += '</div>';
+			}
+        }
+		*/
+		
+		// *** CESAR ***
+		var encprint = 0; //Variable para saber si ya pasó una vez
+		if (!localStorage.getItem("storagereqCotizaciones")) {
+			//alert('storageListaCotizacionesDestacada is null');
+			processError('', 1000, '');
+		} else {
+			var reqCotizacionesGuardada = localStorage.getItem("storagereqCotizaciones");
+			reqCotizaciones  = [];
+			reqCotizaciones = eval('(' + reqCotizacionesGuardada + ')');
+		}
+				
+        for (var iDetalle = 0; iDetalle < reqCotizaciones.length; iDetalle++) {
+            var strHtmlColorFondo = '';
+            if(this.codigoProducto==reqCotizaciones[iDetalle].codigoProducto){				
+				if (encprint == 0) {
+					resultadoDiv += '<div class="row">';
+					resultadoDiv += '<div class="row cssDetalleEncabezado">';
+					resultadoDiv += '<div class="col-xs-4">';
+					resultadoDiv += 'PUERTO';
+					resultadoDiv += '</div>';
+					resultadoDiv += '<div class="col-xs-4">';
+					resultadoDiv += 'PRECIO P/TN';
+					resultadoDiv += '</div>';
+					resultadoDiv += '<div class="col-xs-4">';
+					resultadoDiv += 'OBSERVACI&#211;N';
+					resultadoDiv += '</div>';
+					resultadoDiv += '</div>';				
+					encprint = 1; //Para que no vuelva a imprimir el header de la tabla
+				}
+				if (iDetalle % 2 != 0) {
+					strHtmlColorFondo = ' cssDetalleImpar ';
+				}
+				resultadoDiv += '<div class="row cssDetalle' + strHtmlColorFondo + '">';
+				resultadoDiv += '<div class="col-xs-4 colDetalleDescripcionPuerto">';
+				resultadoDiv += reqCotizaciones[iDetalle].descripcionPuerto;
+				resultadoDiv += '</div>';
+				resultadoDiv += '<div class="col-xs-4 colDetallePrecio">';
+	
+				resultadoDiv += reqCotizaciones[iDetalle].abreviaturaMoneda + ' ' + reqCotizaciones[iDetalle].valorString;
+				resultadoDiv += '</div>';
+				resultadoDiv += '<div class="col-xs-4 colDetalleObservacion">';
+				resultadoDiv += reqCotizaciones[iDetalle].observacion;
+				resultadoDiv += '</div>';
+				resultadoDiv += '</div>';
+			}
         }
         resultadoDiv += '</div>';
         // fin detalle

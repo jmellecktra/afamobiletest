@@ -27,8 +27,8 @@ var isCargarInformes = true;
 
 var telefonoDelUsuario = '';
 
-//Agregado Cesar
-var reqCotizaciones = '';
+//*** CESAR ***
+var reqCotizaciones = [];
 var reqCotHistoricas = '';
 
 function cotizacion() {
@@ -445,8 +445,8 @@ function CargarParametroEntradaCotizaciones(pCodigoTipoCotizacion, pCodigoTipoCl
 }
 
 
+// *** CESAR *** 
 function CargaConIndiceDetalleCotizacion(pIndex) {
-	if (reqCotizaciones != 'xx') { //Ya fue cargado
 		$.ajax({
 			type: "POST",
 			url: wsUrlCotizacion,
@@ -456,33 +456,50 @@ function CargaConIndiceDetalleCotizacion(pIndex) {
 			xhrFields: {
 				withCredentials: true
 			},
-			//data: CargarParametroEntradaCotizaciones(1, 11, obtenerFechaParametroEntrada(0), '', cotizacionesDestacada[pIndex].codigoProducto, '', ''),
-			data: CargarParametroEntradaCotizaciones_Ordenada(1, 11, obtenerFechaParametroEntrada(0), '', '', cotizacionesDestacada[pIndex].codigoProducto, '', ''),
-			// ***** CESAR
-			//data: CargarParametroEntradaCotizaciones_Ordenada(1, 11, obtenerFechaParametroEntrada(0), '', '', '', '', ''),
+			data: CargarParametroEntradaCotizaciones_Ordenada(1, 11, obtenerFechaParametroEntrada(0), '', '', '', '', ''),
 			success: processSuccessDetalleCotizacion
 		});
-	} else {
-		processSuccessDetalleCotizacionBis(reqCotizaciones)
-	}
 }
 
 function processSuccessDetalleCotizacion(data, status, req) {
-    reqCotizaciones = req.responseText;
-	cotizacionesDestacada[indexCotizacionesDestacada].listaDetalle = ObtenerResultadoCotizacionDetalleJavascript(req.responseText);
-	if ((cotizacionesDestacada.length - 1) > indexCotizacionesDestacada) {
-		indexCotizacionesDestacada++;
-		CargaConIndiceDetalleCotizacion(indexCotizacionesDestacada);
+	reqCotizaciones = ObtenerResultadoCotizacionDetalleJavascript(req.responseText);
+	CargaCotizacionHistoricaConIndiceDetacado(0);
+	if (window.localStorage) {
+		localStorage.removeItem('storagereqCotizaciones');
+		var reqCotizacionesDestacadaAGuardar = JSON.stringify(reqCotizaciones);
+		localStorage.setItem('storagereqCotizaciones', reqCotizacionesDestacadaAGuardar);
 	} else {
-		indexCotizacionesDestacada = 0;
-		if (cotizacionesDestacada.length > 0) {
-			CargaCotizacionHistoricaConIndiceDetacado(indexCotizacionesDestacada);
-		}
-	}
+		processError('', 1000, '');
+	}	
+//	cotizacionesDestacada[indexCotizacionesDestacada].listaDetalle = ObtenerResultadoCotizacionDetalleJavascript(req.responseText);
+//	if ((cotizacionesDestacada.length - 1) > indexCotizacionesDestacada) {
+//		indexCotizacionesDestacada++;
+//		CargaConIndiceDetalleCotizacion(indexCotizacionesDestacada);
+//	} else {
+//		indexCotizacionesDestacada = 0;
+//		if (cotizacionesDestacada.length > 0) {
+//			CargaCotizacionHistoricaConIndiceDetacado(indexCotizacionesDestacada);
+//		}
+//	}
 }
 
-//Agregado Cesar
-function processSuccessDetalleCotizacionBis(req) {
+/* ORIGINAL
+
+function CargaConIndiceDetalleCotizacion(pIndex) {
+		$.ajax({
+			type: "POST",
+			url: wsUrlCotizacion,
+			contentType: "application/xml; charset=utf-8", //"text/xml",
+			dataType: "xml",
+			crossDomain: true,
+			xhrFields: {
+				withCredentials: true
+			},
+			data: CargarParametroEntradaCotizaciones_Ordenada(1, 11, obtenerFechaParametroEntrada(0), '', '', cotizacionesDestacada[pIndex].codigoProducto, '', ''),
+			success: processSuccessDetalleCotizacion
+		});
+}
+function processSuccessDetalleCotizacion(data, status, req) {
 	cotizacionesDestacada[indexCotizacionesDestacada].listaDetalle = ObtenerResultadoCotizacionDetalleJavascript(req.responseText);
 	if ((cotizacionesDestacada.length - 1) > indexCotizacionesDestacada) {
 		indexCotizacionesDestacada++;
@@ -494,6 +511,11 @@ function processSuccessDetalleCotizacionBis(req) {
 		}
 	}
 }
+*/
+
+
+
+
 
 
 
@@ -597,7 +619,6 @@ function processSuccessCotizacionHistoricaBis(req) {
 		} else {
 			processError('', 1000, '');
 		}
-
 		CargarCotizacionesDestacadaHtml();
 	}
 }
