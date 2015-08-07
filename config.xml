@@ -99,7 +99,7 @@
     <gap:splash src="img/Splash_Screen/WINPHONE_splash_screen_480x800.png" gap:platform="winphone" />
     <gap:splash src="splash.png" />
     <gap:plugin name="nl.x-services.plugins.socialsharing" />
-	<gap:plugin name="com.phonegap.plugins.pushplugin" version="2.4.0" />
+	<gap:plugin name="com.phonegap.plugins.pushplugin" version="2.5.0" />
     <gap:plugin name="com.verso.cordova.clipboard" version="0.1.0" />
     <!--<gap:plugin name="org.apache.cordova.statusbar"/>-->
 
