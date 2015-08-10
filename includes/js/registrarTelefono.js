@@ -8,7 +8,7 @@ function infoRegistracion() {
     this.platform = '';
 }
 var objDatosTelefono = null;
-/*
+
 function LlamarFuncionRegistracionTelefono(pUrlCargaDatosTel) {
     $.ajax({
         url: pUrlCargaDatosTel,
@@ -22,7 +22,7 @@ function LlamarFuncionRegistracionTelefono(pUrlCargaDatosTel) {
         }
     });
 }
-*/
+
 function onDeviceReady() {
     //alert('onDeviceReady');
     objDatosTelefono = new infoRegistracion();
@@ -43,7 +43,6 @@ function onDeviceReady() {
 			processError('', 6000, '');
         }
     } else if (device.platform == 'iOS') {
-        /*
         try {
             pushNotification.register(tokenHandler, errorHandler, {
                 "badge": "true",
@@ -54,7 +53,6 @@ function onDeviceReady() {
         } catch (err) {
 			processError('', 6000, '');
         }
-        */
     } else if (device.platform == 'WinCE' || device.platform == 'Win32NT') {
         var channelName = 'AFASCL.AFAMvil';
         try {
