@@ -761,10 +761,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff354d', end
 }
 
 .cssNovedadesDescripcion {
-    padding-top: 1em;
-    /* font-size: 1.25em;*/
-    
-    font-size: 1em;
+    padding-top: 1em;   
+    font-size: 1.15em;
 }
 
 #divRowParteScrollNovedades {
@@ -887,7 +885,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff354d', end
 .cssInformeDescripcion {
     overflow-y: auto;
     padding-right: 1em;
-    font-size: 0.9em;
+    font-size: 1.15em !important;
 }
 
 .cssInformeDescripcion span {
