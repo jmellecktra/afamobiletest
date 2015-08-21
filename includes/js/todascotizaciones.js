@@ -1,5 +1,7 @@
 $(document).ready(function () {
-	if (!localStorage.getItem("storageListaTodasCotizaciones")) {
+	//if (!localStorage.getItem("storageListaTodasCotizaciones")) {
+	////UPDATE-PERFORMANCE
+	if (!localStorage.getItem("storagereqCotizaciones")) {
 		OcultarDivBloqueo();
 		processError('', 1000, '');
 		return;
@@ -12,7 +14,9 @@ $(document).ready(function () {
 
     CargarHtmlFechaMenuPrincipal();
 
-	var listaTodasCotizacionesGuardada = localStorage.getItem("storageListaTodasCotizaciones");
+	//var listaTodasCotizacionesGuardada = localStorage.getItem("storageListaTodasCotizaciones");
+	//UPDATE-PERFORMANCE
+	var listaTodasCotizacionesGuardada = localStorage.getItem("storagereqCotizaciones");
 	listaTodasCotizaciones = eval('(' + listaTodasCotizacionesGuardada + ')');
 	CargarTodasCotizacionesHtml();
 
@@ -23,7 +27,6 @@ $(document).ready(function () {
 function onresizeBody() {
     var altura = ($(document).height() - ($('#header').outerHeight() + $('#StatusBar').outerHeight()));
     $('#divResultadoTodasCotizaciones').css('height', altura);
-
     $('#divParteScrollTodasCotizaciones').css('height', altura - ($('#divRowTodasCotizacionesTitulo').outerHeight() + $('#divRowTodasCotizacionesEncabezado').outerHeight()));
 }
 

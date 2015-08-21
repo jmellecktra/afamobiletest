@@ -200,15 +200,21 @@ function defineLoadUpdates() {
 function timeController() {
 	if (startTime == startTimeOut) {
 		//console.log('Inicia los ' + startTimeOut + 'seg de espera de la carga')
-		CargaCotizacionDestacada(); // timeOutCallbacks[0]
-		CargaNovedades(); // timeOutCallbacks[1]
-		CargaTodasCotizaciones(); // timeOutCallbacks[2]
-		CargaUltimoInforme(); // timeOutCallbacks[3]
+		//UPDATE-PERFORMANCE
+		//CargaCotizacionDestacada(); // timeOutCallbacks[0]
+		//CargaNovedades(); // timeOutCallbacks[1]	
+		//CargaTodasCotizaciones(); // timeOutCallbacks[2]	
+		//CargaUltimoInforme(); // timeOutCallbacks[3]
+		
+		CargaNovedades(); // timeOutCallbacks[0]				
+		CargaCotizacionDestacada(); // timeOutCallbacks[1]
+		CargaUltimoInforme(); // timeOutCallbacks[2]
+		//CargaTodasCotizaciones(); // timeOutCallbacks[2]
 	}
 	startTime--;
 
 	var timeOut = 1;
-	for (var i = 0; i < timeOutCallbacks.length; i++) {
+	for (var i = 0; i < 2; i++) {//i <  timeOutCallbacks.length
 		timeOut *= parseInt(timeOutCallbacks[i]);
 	}
 
@@ -466,6 +472,10 @@ function processSuccessDetalleCotizacion(data, status, req) {
 		localStorage.removeItem('storagereqCotizaciones');
 		var reqCotizacionesDestacadaAGuardar = JSON.stringify(reqCotizaciones);
 		localStorage.setItem('storagereqCotizaciones', reqCotizacionesDestacadaAGuardar);
+		//UPDATE-PERFORMANCE
+		//CargaTodasCotizaciones();
+		timeOutCallbacks[1] = 1;
+		
 	} else {
 		processError('', 1000, '');
 	}	
@@ -624,8 +634,8 @@ function processSuccessCotizacionHistoricaBis(req) {
 
 function CargaTodasCotizaciones() {
     if (isCargarCotizaciones) {		
-		//Nunca entró acá.
-		if (reqCotizaciones == '') { //Ya fue cargado
+		//TUNING-PERFORMANCE
+		if (reqCotizaciones.length == 0 || !localStorage.getItem("storagereqCotizaciones")) { //Ya fue cargado
 			$.ajax({
 				type: "POST",
 				url: wsUrlCotizacion,
@@ -640,7 +650,7 @@ function CargaTodasCotizaciones() {
 				success: processSuccessTodasCotizaciones
 			});
 		} else {
-			processSuccessTodasCotizacionesBis(isCargarCotizaciones);	
+			processSuccessTodasCotizacionesBis();	
 		}
     }
 }
@@ -656,9 +666,9 @@ function processSuccessTodasCotizaciones(data, status, req) {
 	}
 }
 
-//funcion agregada
-function processSuccessTodasCotizacionesBis(req) {
-	listaTodasCotizaciones = ObtenerTodasCotizaciones(req.responseText);
+//TUNING-PERFORMANCE
+function processSuccessTodasCotizacionesBis() {
+	listaTodasCotizaciones = ObtenerTodasCotizaciones(reqCotizaciones);
 	if (window.localStorage) {
 		var listaTodasCotizacionesAGuardar = JSON.stringify(listaTodasCotizaciones);
 		localStorage.setItem('storageListaTodasCotizaciones', listaTodasCotizacionesAGuardar);
@@ -734,7 +744,6 @@ function CargaNovedades() {
 		listaNovedades = eval('(' + listaNovedadesGuardada + ')');
 
         CargarNovedadesHtml();
-		//timeOutCallbacks[1] = 1;
     }
 }
 
@@ -748,7 +757,7 @@ function processSuccessNovedades(data, status, req) {
 	}
 
 	CargarNovedadesHtml();
-	timeOutCallbacks[1] = 1;
+	timeOutCallbacks[0] = 1;
 }
 
 function ObtenerNovedades(pXML) {
@@ -792,7 +801,7 @@ function CargaUltimoInforme() {
 		}
 		var listaInformesGuardada = localStorage.getItem("storageListaInformes");
 		listaInformes = eval('(' + listaInformesGuardada + ')');
-		timeOutCallbacks[3] = 1;
+		timeOutCallbacks[2] = 1;
 	}
 }
 
@@ -822,7 +831,7 @@ function processSuccessInforme(data, status, req) {
 	if (window.localStorage) {
 		var listaInformesAGuardar = JSON.stringify(listaInformes);
 		localStorage.setItem('storageListaInformes', listaInformesAGuardar);
-		timeOutCallbacks[3] = 1;
+		timeOutCallbacks[2] = 1;
 	} else {
 		processError('', 1000, '');
 	}

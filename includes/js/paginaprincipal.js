@@ -389,7 +389,7 @@ function CargarCotizacionesDestacadaHtml() {
     onresizeBody();
 
 	CargarHtmlFechaMenuPrincipal();
-	timeOutCallbacks[0] = 1;
+	timeOutCallbacks[1] = 1;
 }
 
 function CargarDeNuevoHistorico() {
@@ -583,7 +583,7 @@ function CargarNovedadesHtml() {
 	}
 
     CargarInformeCierreMercado();
-	timeOutCallbacks[1] = 1;
+	timeOutCallbacks[0] = 1;
 }
 
 function CargarInformeHtml() {
