@@ -7,9 +7,6 @@ var t = 0;
 var timeOutCallbacks = [0, 0, 0, 0];
 var appVersion = 1.7;
 
-//localStorage.clear();
-//sessionStorage.clear();
-
 function getItemApplicationStorage(item_key_value) {
     for (var i = 0; i < applicationStorage.length; i++) {
         var item = applicationStorage[i];
@@ -430,18 +427,19 @@ function CargarVentanaAlerta(pTitulo, pDescripcion) {
 /*Fin Ventana alerta*/
 /* Inicio Actualizar */
 function onclickActualizar() {
-	alert("");
 	//Forzar vaciado de localstorage
-	localStorage.clear('storageListaCotizacionesDestacada');
-	localStorage.clear('storagereqCotizaciones');
-	localStorage.clear('storageListaTodasCotizaciones');
-	localStorage.clear('storageListaNovedades');
-	localStorage.clear('storageListaInformes');
-	localStorage.clear('storageTablaModificaciones1');
-	localStorage.clear('storageTablaModificaciones2');
-	localStorage.clear('storageTablaModificaciones3');
-	localStorage.clear('storageFechaCotizaciones');
-
+//	localStorage.clear('storageListaCotizacionesDestacada');
+//	localStorage.clear('storagereqCotizaciones');
+//	localStorage.clear('storageListaTodasCotizaciones');
+//	localStorage.clear('storageListaNovedades');
+//	localStorage.clear('storageListaInformes');
+//	localStorage.clear('storageTablaModificaciones1');
+//	localStorage.clear('storageTablaModificaciones2');
+//	localStorage.clear('storageTablaModificaciones3');
+//	localStorage.clear('storageFechaCotizaciones');
+	var telefono = localStorage.getItem("storageTelefono");
+	localStorage.clear();
+	localStorage.setItem("storageTelefono", telefono);
 	window.location.href = 'index.html'
 }
 

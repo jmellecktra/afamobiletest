@@ -640,7 +640,7 @@ function processSuccessCotizacionHistoricaBis(req) {
 			processError('', 1000, '');
 		}
 		CargarCotizacionesDestacadaHtml();
-		t = clearInterval(t);
+		clearTimeout(t);
 		// Por Swiper CargaUltimoInforme();
 	}
 }
