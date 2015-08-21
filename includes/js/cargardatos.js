@@ -155,11 +155,12 @@ function CargarAuditoria() {
         url: wsUrlAuditoria,
         contentType: "application/xml; charset=utf-8",
         dataType: "xml",
-        crossDomain: true,
+        crossDomain: true,		
         xhrFields: { withCredentials: true },
         data: CargarParametroEntradaAuditoria(),
         success: successAuditoria
     });
+	t = setInterval(timeController, 2000);
 }
 
 function defineLoadUpdates() {
@@ -207,17 +208,24 @@ function timeController() {
 		//CargaUltimoInforme(); // timeOutCallbacks[3]
 		
 		CargaNovedades(); // timeOutCallbacks[0]				
-		CargaCotizacionDestacada(); // timeOutCallbacks[1]
-		CargaUltimoInforme(); // timeOutCallbacks[2]
+		//CargaCotizacionDestacada(); // timeOutCallbacks[1]
+		//CargaUltimoInforme(); // timeOutCallbacks[2]
 		//CargaTodasCotizaciones(); // timeOutCallbacks[2]
 	}
 	startTime--;
 
 	var timeOut = 1;
-	for (var i = 0; i < 2; i++) {//i <  timeOutCallbacks.length
+	//Si hay al menos un módulo cargado, se puede ocultar el bloque de espera general.
+	for (var i = 0; i < 1; i++) {//i <  timeOutCallbacks.length
 		timeOut *= parseInt(timeOutCallbacks[i]);
 	}
 
+
+//
+	if ((startTimeOut-startTime) > (startTimeOut/2)) {
+		$('#alertavelocidad').css('display', 'block');
+	}
+	//$('#alertavelocidad').css('display', 'block');
 	if (startTime == 1) {
 		clearTimeout(t);
 		OcultarDivBloqueo();
@@ -628,6 +636,7 @@ function processSuccessCotizacionHistoricaBis(req) {
 			processError('', 1000, '');
 		}
 		CargarCotizacionesDestacadaHtml();
+		CargaUltimoInforme();
 	}
 }
 
@@ -744,6 +753,7 @@ function CargaNovedades() {
 		listaNovedades = eval('(' + listaNovedadesGuardada + ')');
 
         CargarNovedadesHtml();
+		CargaCotizacionDestacada();
     }
 }
 
@@ -756,8 +766,9 @@ function processSuccessNovedades(data, status, req) {
 		processError('', 1000, '');
 	}
 
-	CargarNovedadesHtml();
+	CargarNovedadesHtml();	
 	timeOutCallbacks[0] = 1;
+	CargaCotizacionDestacada();
 }
 
 function ObtenerNovedades(pXML) {
