@@ -1,4 +1,5 @@
-/*var wsUrlCotizacion = "http://concentrador.afascl.coop:38080/Concentrador/webservices/CotizacionCerealPuertoService?wsdl/";
+/*
+var wsUrlCotizacion = "http://concentrador.afascl.coop:38080/Concentrador/webservices/CotizacionCerealPuertoService?wsdl/";
 var wsUrlCotizacionHistorico = "http://concentrador.afascl.coop:38080/Concentrador/webservices/CotizacionCerealPuertoService?wsdl/";
 var wsUrlNovedades = "http://concentrador.afascl.coop:38080/Concentrador/webservices/NotificacionService?wsdl/";
 var wsUrlAuditoria = "http://concentrador.afascl.coop:38080/Concentrador/webservices/AuditoriaService?wsdl/";
@@ -90,7 +91,7 @@ function FuncionInicio() {
 		} else {
 			CargarAuditoria();
 		}
-	} // Falta definir q pasa en caso de que no haya soporte al localStorage!!!
+	} //Falta definir q pasa en caso de que no haya soporte al localStorage!!!
 }
 
 function CargarParametroEntradaGuardarTelefono(pTelefono) {
@@ -150,6 +151,7 @@ function processSuccessGuardarTelefono(data, status, req) {
 
 function CargarAuditoria() {
     listaTablaModificaciones = null;
+	t = setInterval(timeController, 1000);
     $.ajax({
         type: "POST",
         url: wsUrlAuditoria,
@@ -160,13 +162,12 @@ function CargarAuditoria() {
         data: CargarParametroEntradaAuditoria(),
         success: successAuditoria
     });
-	t = setInterval(timeController, 2000);
+	
 }
 
 function defineLoadUpdates() {
 	var labelTableStorage = "storageTablaModificaciones";
-	var update = true;
-	//alert("HAY #UPDATES == " + listaTablaModificaciones.length);
+	var update = false;	
 	for (var i = 0; i < listaTablaModificaciones.length; i++) {
 		//alert(i+1);
 		//console.log(listaTablaModificaciones[i]);
@@ -183,12 +184,12 @@ function defineLoadUpdates() {
 			alert('fecha Nueva => '+d);
 			d = new Date(storageDate);
 			alert('fecha Guardada => '+d);*/
+			//alert(newDate + ' ' +  storageDate);
 			if (newDate != storageDate) {
 				update = true;
 				localStorage.setItem(tableNameKey, JSON.stringify(listaTablaModificaciones[i]));
 			}
 		}
-
 		switch (listaTablaModificaciones[i].codigoTabla) {
 			case 1: isCargarCotizaciones = update; break;
 			case 2: listaNovedades = update; break;
@@ -206,7 +207,6 @@ function timeController() {
 		//CargaNovedades(); // timeOutCallbacks[1]	
 		//CargaTodasCotizaciones(); // timeOutCallbacks[2]	
 		//CargaUltimoInforme(); // timeOutCallbacks[3]
-		
 		CargaNovedades(); // timeOutCallbacks[0]				
 		//CargaCotizacionDestacada(); // timeOutCallbacks[1]
 		//CargaUltimoInforme(); // timeOutCallbacks[2]
@@ -254,11 +254,15 @@ function successAuditoria(data, status, req) {
 
 	// Obtener las actualizaciones y analizarlas
 	CargarResultadoAuditoriaJavascript(req.responseText);
+	
+	//var xmltest = '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body><ns2:consultaModificacionesResponse xmlns:ns2="http://www.afascl.coop/servicios"><return><codigoResultado>0</codigoResultado><descripcionResultado>Consulta de modificaciones (Auditoría) con Éxito </descripcionResultado><modificaciones><codigoTabla>1</codigoTabla><fecha>21/08/2015</fecha><hora>16:55:48</hora></modificaciones><modificaciones><codigoTabla>2</codigoTabla><fecha>21/08/2015</fecha><hora>14:39:20</hora></modificaciones><modificaciones><codigoTabla>3</codigoTabla><fecha>20/08/2015</fecha><hora>16:37:50</hora></modificaciones><error/></return></ns2:consultaModificacionesResponse></soap:Body></soap:Envelope>';
+	//CargarResultadoAuditoriaJavascript(xmltest);
+	
 	if (listaTablaModificaciones && (listaTablaModificaciones.length > 0)) {
 		// Hay actualizaciones, definir si las mismas son diferentes que las almacenadas
 		defineLoadUpdates();
 	}
-
+	timeOutCallbacks[3] = 1;
 	t = setInterval(timeController, 1000);
 }
 
@@ -320,7 +324,6 @@ function CargaCotizacionDestacada() {
 		}
 		var cotizacionesDestacadaGuardada = localStorage.getItem("storageListaCotizacionesDestacada");
 		cotizacionesDestacada = eval('(' + cotizacionesDestacadaGuardada + ')');
-
         CargarCotizacionesDestacadaHtml();
     }
 }
@@ -368,6 +371,7 @@ function CargarResultadoCotizacionDestacadoJavascript(pXML) {
 		var fecha = fechaPartes[2]+'/'+fechaPartes[1]+'/'+fechaPartes[0]; // new format: dd/mm/yyyy
 		var horaPartes = fechaData[1].split('-');
 		var newUtcValue = obtenerFechaUTC(fecha, horaPartes[0]);
+		
 		if (newUtcValue > maxUtcValue) {
 			maxUtcValue = newUtcValue;
 			maxDate = obj.fechaCotizacion;
@@ -636,7 +640,8 @@ function processSuccessCotizacionHistoricaBis(req) {
 			processError('', 1000, '');
 		}
 		CargarCotizacionesDestacadaHtml();
-		CargaUltimoInforme();
+		t = clearInterval(t);
+		// Por Swiper CargaUltimoInforme();
 	}
 }
 
@@ -765,10 +770,11 @@ function processSuccessNovedades(data, status, req) {
 	} else {
 		processError('', 1000, '');
 	}
-
-	CargarNovedadesHtml();	
+	
 	timeOutCallbacks[0] = 1;
-	CargaCotizacionDestacada();
+	CargaUltimoInforme();
+	//Sweeper CargaCotizacionDestacada();
+	//CargarNovedadesHtml();	
 }
 
 function ObtenerNovedades(pXML) {
@@ -846,6 +852,8 @@ function processSuccessInforme(data, status, req) {
 	} else {
 		processError('', 1000, '');
 	}
+	CargarNovedadesHtml();
+	CargaCotizacionDestacada();
 }
 
 function ObtenerInforme(pXML) {
