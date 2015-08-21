@@ -25,7 +25,7 @@
     <preference name="KeyboardDisplayRequiresUserAction" value="true" />
     <preference name="HideKeyboardFormAccessoryBar" value="true" />
     <preference name="SuppressesIncrementalRendering" value="true" />
-    <preference name="android-minSdkVersion" value="14" />
+    <preference name="android-minSdkVersion" value="10" />
     <preference name="android-installLocation" value="internalOnly" />
     <preference name="SplashScreenDelay" value="5000" />
     <preference name="ErrorUrl" value="" />
