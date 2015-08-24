@@ -101,7 +101,7 @@ function onNotification(e) {
 
 	case 'message':
 		if (e.message.length > 0) {
-			CargarVentanaAlerta(e.payload.title, e.message);
+			CargarVentanaAlertaNotification(e.payload.title, e.message);
 		}
 		break;
 

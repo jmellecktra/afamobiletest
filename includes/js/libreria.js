@@ -424,6 +424,21 @@ function CargarVentanaAlerta(pTitulo, pDescripcion) {
     }   
 }
 
+function btnCerrarAlertaNotification() {
+    $('#divVentanaAlertaContenedorNotification').css('display', 'none');
+}
+
+function CargarVentanaAlertaNotification(pTitulo, pDescripcion) {
+    $('#divVentanaTituloNotification').html('');
+    $('#divVentanaDescripcioNotification').html('');
+    $('#divVentanaTituloNotification').html(pTitulo);
+    if (pDescripcion != '') {
+        $('#divVentanaDescripcioNotification').html(pDescripcion);
+        $('#divVentanaAlertaContenedorNotification').css('display', 'block');
+    }   
+}
+
+
 /*Fin Ventana alerta*/
 /* Inicio Actualizar */
 function onclickActualizar() {
