@@ -5,7 +5,7 @@ var startTimeOut = 30;
 var startTime = startTimeOut;
 var t = 0;
 var timeOutCallbacks = [0, 0, 0, 0];
-var appVersion = 2.0;
+var appVersion = '2.0';
 
 function getItemApplicationStorage(item_key_value) {
     for (var i = 0; i < applicationStorage.length; i++) {
@@ -426,6 +426,7 @@ function CargarVentanaAlerta(pTitulo, pDescripcion) {
 
 function btnCerrarAlertaNotification() {
     $('#divVentanaAlertaContenedorNotification').css('display', 'none');
+    onclickActualizar();
 }
 
 function CargarVentanaAlertaNotification(pTitulo, pDescripcion) {
@@ -517,7 +518,7 @@ function getAppVersion() {
 	return html;
 }
 
-/*$(document).ready(function () {
+$(document).ready(function () {
     $.ajaxSetup({
         error: function( jqXHR, textStatus, errorThrown ) {
 				var error_id = 50; // unknown
@@ -547,7 +548,7 @@ function getAppVersion() {
 			   window.location.href = "error.html?id=" + error_id;
 			}
     });
-});*/
+});
 
 function mobileEventsHandler(event) {
 	//alert(event.target.isIndex);
