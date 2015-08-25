@@ -98,7 +98,7 @@ height: 1.2em;
 
 .cssTdHeaderDerecha {
     text-align: right;
-    background: #606966 !important;
+    background: #FFF;
     width: 9.8em;/*width: 9.2em;*/
 }
 
@@ -1155,8 +1155,3 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff354d', end
 }
 
 /* Fin Ventana alerta */
-
-.compartir, .logo {float: left;}
-.logo a {float: left; padding: 0 0.2em 0 0; background: #fff;}
-.compartir {background-color:#606966;}
-.compartir:hover {background-color:#4e5756;}
