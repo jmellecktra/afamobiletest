@@ -528,9 +528,9 @@ $(document).ready(function () {
 				} else if (jqXHR.status == 404) {
 					//alert('Requested page not found [404]');
 					error_id = 110;
-				} else if (jqXHR.status == 500) {
+//				} else if (jqXHR.status == 500) {
 					//alert('Internal Server Error [500].');
-					error_id = 120;
+//					error_id = 120;
 				} else if (textStatus === 'parsererror') {
 					//alert('Requested JSON parse failed.');
 					error_id = 130;
