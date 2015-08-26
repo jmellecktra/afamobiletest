@@ -517,7 +517,7 @@ function getAppVersion() {
 
 	return html;
 }
-/*
+
 $(document).ready(function () {
     $.ajaxSetup({
         error: function( jqXHR, textStatus, errorThrown ) {
@@ -548,7 +548,7 @@ $(document).ready(function () {
 			   window.location.href = "error.html?id=" + error_id;
 			}
     });
-*/
+
 });
 
 function mobileEventsHandler(event) {
