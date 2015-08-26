@@ -10,6 +10,7 @@ var wsUrlGuardarTelefono = "http://concentrador.afascl.coop:38080/Concentrador/w
 /* EN CACHE */
 
 // http://localhost/cachexml/
+
 /*
 var wsUrlCotizacion =          "http://localhost/cachexml/CotizacionCerealPuertoService.xml";
 var wsUrlCotizacionHistorico = "http://localhost/cachexml/CotizacionCerealPuertoService.xml";
@@ -17,6 +18,7 @@ var wsUrlNovedades =           "http://localhost/cachexml/NotificacionService.xm
 var wsUrlAuditoria =           "http://localhost/cachexml/AuditoriaService.xml";
 var wsUrlInforme =             "http://localhost/cachexml/InformeService.xml";
 */
+
 /*
 var wsUrlCotizacion =          "http://www.eigadmin.com.ar/web/afa_cache_xml/CotizacionCerealPuertoService.xml";
 var wsUrlCotizacionHistorico = "http://www.eigadmin.com.ar/web/afa_cache_xml/CotizacionCerealPuertoService.xml";
@@ -134,7 +136,7 @@ function CargarParametroEntradaGuardarTelefono(pTelefono) {
 function funGuardarTelefono(pTelefono) {
     telefonoDelUsuario = pTelefono;
     $.ajax({
-        type: "GET",
+        type: "POST",
         url: wsUrlGuardarTelefono,
         contentType: "application/xml; charset=utf-8", //"text/xml",
         dataType: "xml",
@@ -174,7 +176,7 @@ function CargarAuditoria() {
     listaTablaModificaciones = null;
 	t = setInterval(timeController, 1000);
     $.ajax({
-        type: "GET",
+        type: "POST",
         url: wsUrlAuditoria,
         contentType: "application/xml; charset=utf-8",
         dataType: "xml",
@@ -330,7 +332,7 @@ function CargarResultadoAuditoriaJavascript(pXML) {
 function CargaCotizacionDestacada() {
     if (isCargarCotizaciones || !localStorage.getItem("storageListaCotizacionesDestacada")) {
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: wsUrlCotizacion,
             contentType: "application/xml; charset=utf-8",
             dataType: "xml",
@@ -485,7 +487,7 @@ function CargarParametroEntradaCotizaciones(pCodigoTipoCotizacion, pCodigoTipoCl
 // *** CESAR *** 
 function CargaConIndiceDetalleCotizacion(pIndex) {
 		$.ajax({
-			type: "GET",
+			type: "POST",
 			url: wsUrlCotizacion,
 			contentType: "application/xml; charset=utf-8", //"text/xml",
 			dataType: "xml",
@@ -528,7 +530,7 @@ function processSuccessDetalleCotizacion(data, status, req) {
 
 function CargaConIndiceDetalleCotizacion(pIndex) {
 		$.ajax({
-			type: "GET",
+			type: "POST",
 			url: wsUrlCotizacion,
 			contentType: "application/xml; charset=utf-8", //"text/xml",
 			dataType: "xml",
@@ -586,7 +588,7 @@ function ObtenerResultadoCotizacionDetalleJavascript(pXML) {
 function CargaCotizacionHistoricaConIndiceDetacado(pIndex) {
 	if (reqCotHistoricas == '') {
 		$.ajax({
-			type: "GET",
+			type: "POST",
 			url: wsUrlCotizacionHistorico,
 			contentType: "application/xml; charset=utf-8",
 			dataType: "xml",
@@ -672,7 +674,7 @@ function CargaTodasCotizaciones() {
 		//TUNING-PERFORMANCE
 		if (reqCotizaciones.length == 0 || !localStorage.getItem("storagereqCotizaciones")) { //Ya fue cargado
 			$.ajax({
-				type: "GET",
+				type: "POST",
 				url: wsUrlCotizacion,
 				contentType: "application/xml; charset=utf-8", //"text/xml",
 				dataType: "xml",
@@ -760,7 +762,7 @@ function CargarParametroEntradaNovedades(pFechaDesde, pFechaHasta, pCodigoCatego
 function CargaNovedades() {
     if (isCargarNotificaciones || !localStorage.getItem("storageListaNovedades")) {
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: wsUrlNovedades,
             contentType: "application/xml; charset=utf-8", //"text/xml",
             dataType: "xml",
@@ -817,7 +819,7 @@ function ObtenerNovedades(pXML) {
 function CargaUltimoInforme() {
     if (isCargarInformes || !localStorage.getItem("storageListaInformes")) {
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: wsUrlInforme,
             contentType: "application/xml; charset=utf-8", //"text/xml",
             dataType: "xml",
