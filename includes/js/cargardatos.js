@@ -17,21 +17,21 @@ var wsUrlNovedades =           "http://localhost/cachexml/NotificacionService.xm
 var wsUrlAuditoria =           "http://localhost/cachexml/AuditoriaService.xml";
 var wsUrlInforme =             "http://localhost/cachexml/InformeService.xml";
 */
-
+/*
 var wsUrlCotizacion =          "http://www.eigadmin.com.ar/web/afa_cache_xml/CotizacionCerealPuertoService.xml";
 var wsUrlCotizacionHistorico = "http://www.eigadmin.com.ar/web/afa_cache_xml/CotizacionCerealPuertoService.xml";
 var wsUrlNovedades =           "http://www.eigadmin.com.ar/web/afa_cache_xml/NotificacionService.xml";
 var wsUrlAuditoria =           "http://www.eigadmin.com.ar/web/afa_cache_xml/AuditoriaService.xml";
 var wsUrlInforme =             "http://www.eigadmin.com.ar/web/afa_cache_xml/InformeService.xml";
+*/
 
 
-/*
 var wsUrlCotizacion = "http://concentrador.afascl.coop:8080/Concentrador/webservices/CotizacionCerealPuertoService?wsdl/";
 var wsUrlCotizacionHistorico = "http://concentrador.afascl.coop:8080/Concentrador/webservices/CotizacionCerealPuertoService?wsdl/";
 var wsUrlNovedades = "http://concentrador.afascl.coop:8080/Concentrador/webservices/NotificacionService?wsdl/";
 var wsUrlAuditoria = "http://concentrador.afascl.coop:8080/Concentrador/webservices/AuditoriaService?wsdl/";
 var wsUrlInforme = "http://concentrador.afascl.coop:8080/Concentrador/webservices/InformeService?wsdl/";
-*/
+
 var wsUrlGuardarTelefono = "http://concentrador.afascl.coop:8080/Concentrador/webservices/TelefonoService?wsdl/";
 
 var wsUrlRegistracionTelefono = 'http://190.210.143.156:50002/registrationinfo/';
