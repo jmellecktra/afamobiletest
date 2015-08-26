@@ -190,7 +190,7 @@ function CargarAuditoria() {
 
 function defineLoadUpdates() {
 	var labelTableStorage = "storageTablaModificaciones";
-	var update = true;
+	var update = false;
 	for (var i = 0; i < listaTablaModificaciones.length; i++) {
 		//alert(i+1);
 		//console.log(listaTablaModificaciones[i]);
