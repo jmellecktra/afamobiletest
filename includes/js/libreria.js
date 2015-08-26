@@ -548,8 +548,9 @@ $(document).ready(function () {
 			   window.location.href = "error.html?id=" + error_id;
 			}
     });
-});
 */
+});
+
 function mobileEventsHandler(event) {
 	//alert(event.target.isIndex);
 	if (event.target.isIndex) {
