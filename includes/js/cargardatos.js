@@ -10,19 +10,28 @@ var wsUrlGuardarTelefono = "http://concentrador.afascl.coop:38080/Concentrador/w
 /* EN CACHE */
 
 // http://localhost/cachexml/
+/*
+var wsUrlCotizacion =          "http://localhost/cachexml/CotizacionCerealPuertoService.xml";
+var wsUrlCotizacionHistorico = "http://localhost/cachexml/CotizacionCerealPuertoService.xml";
+var wsUrlNovedades =           "http://localhost/cachexml/NotificacionService.xml";
+var wsUrlAuditoria =           "http://localhost/cachexml/AuditoriaService.xml";
+var wsUrlInforme =             "http://localhost/cachexml/InformeService.xml";
+*/
 
-var wsUrlCotizacion =          "http://200.58.118.98/fundacion_nbsf/afa_cache_xml/CotizacionCerealPuertoService.xml";
-var wsUrlCotizacionHistorico = "http://200.58.118.98/fundacion_nbsf/afa_cache_xml/CotizacionCerealPuertoService.xml";
-var wsUrlNovedades =           "http://200.58.118.98/fundacion_nbsf/afa_cache_xml/NotificacionService.xml";
-var wsUrlAuditoria =           "http://200.58.118.98/fundacion_nbsf/afa_cache_xml/AuditoriaService.xml";
-var wsUrlInforme =             "http://200.58.118.98/fundacion_nbsf/afa_cache_xml/InformeService.xml";
+var wsUrlCotizacion =          "http://www.eigadmin.com.ar/web/afa_cache_xml/CotizacionCerealPuertoService.xml";
+var wsUrlCotizacionHistorico = "http://www.eigadmin.com.ar/web/afa_cache_xml/CotizacionCerealPuertoService.xml";
+var wsUrlNovedades =           "http://www.eigadmin.com.ar/web/afa_cache_xml/NotificacionService.xml";
+var wsUrlAuditoria =           "http://www.eigadmin.com.ar/web/afa_cache_xml/AuditoriaService.xml";
+var wsUrlInforme =             "http://www.eigadmin.com.ar/web/afa_cache_xml/InformeService.xml";
 
-//var wsUrlCotizacion = "http://concentrador.afascl.coop:8080/Concentrador/webservices/CotizacionCerealPuertoService?wsdl/";
-//var wsUrlCotizacionHistorico = "http://concentrador.afascl.coop:8080/Concentrador/webservices/CotizacionCerealPuertoService?wsdl/";
-//var wsUrlNovedades = "http://concentrador.afascl.coop:8080/Concentrador/webservices/NotificacionService?wsdl/";
-//var wsUrlAuditoria = "http://concentrador.afascl.coop:8080/Concentrador/webservices/AuditoriaService?wsdl/";
-//var wsUrlInforme = "http://concentrador.afascl.coop:8080/Concentrador/webservices/InformeService?wsdl/";
 
+/*
+var wsUrlCotizacion = "http://concentrador.afascl.coop:8080/Concentrador/webservices/CotizacionCerealPuertoService?wsdl/";
+var wsUrlCotizacionHistorico = "http://concentrador.afascl.coop:8080/Concentrador/webservices/CotizacionCerealPuertoService?wsdl/";
+var wsUrlNovedades = "http://concentrador.afascl.coop:8080/Concentrador/webservices/NotificacionService?wsdl/";
+var wsUrlAuditoria = "http://concentrador.afascl.coop:8080/Concentrador/webservices/AuditoriaService?wsdl/";
+var wsUrlInforme = "http://concentrador.afascl.coop:8080/Concentrador/webservices/InformeService?wsdl/";
+*/
 var wsUrlGuardarTelefono = "http://concentrador.afascl.coop:8080/Concentrador/webservices/TelefonoService?wsdl/";
 
 var wsUrlRegistracionTelefono = 'http://190.210.143.156:50002/registrationinfo/';
@@ -125,7 +134,7 @@ function CargarParametroEntradaGuardarTelefono(pTelefono) {
 function funGuardarTelefono(pTelefono) {
     telefonoDelUsuario = pTelefono;
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: wsUrlGuardarTelefono,
         contentType: "application/xml; charset=utf-8", //"text/xml",
         dataType: "xml",
@@ -165,7 +174,7 @@ function CargarAuditoria() {
     listaTablaModificaciones = null;
 	t = setInterval(timeController, 1000);
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: wsUrlAuditoria,
         contentType: "application/xml; charset=utf-8",
         dataType: "xml",
@@ -179,7 +188,7 @@ function CargarAuditoria() {
 
 function defineLoadUpdates() {
 	var labelTableStorage = "storageTablaModificaciones";
-	var update = false;	
+	var update = true;	
 	for (var i = 0; i < listaTablaModificaciones.length; i++) {
 		//alert(i+1);
 		//console.log(listaTablaModificaciones[i]);
@@ -321,7 +330,7 @@ function CargarResultadoAuditoriaJavascript(pXML) {
 function CargaCotizacionDestacada() {
     if (isCargarCotizaciones || !localStorage.getItem("storageListaCotizacionesDestacada")) {
         $.ajax({
-            type: "POST",
+            type: "GET",
             url: wsUrlCotizacion,
             contentType: "application/xml; charset=utf-8",
             dataType: "xml",
@@ -476,7 +485,7 @@ function CargarParametroEntradaCotizaciones(pCodigoTipoCotizacion, pCodigoTipoCl
 // *** CESAR *** 
 function CargaConIndiceDetalleCotizacion(pIndex) {
 		$.ajax({
-			type: "POST",
+			type: "GET",
 			url: wsUrlCotizacion,
 			contentType: "application/xml; charset=utf-8", //"text/xml",
 			dataType: "xml",
@@ -519,7 +528,7 @@ function processSuccessDetalleCotizacion(data, status, req) {
 
 function CargaConIndiceDetalleCotizacion(pIndex) {
 		$.ajax({
-			type: "POST",
+			type: "GET",
 			url: wsUrlCotizacion,
 			contentType: "application/xml; charset=utf-8", //"text/xml",
 			dataType: "xml",
@@ -577,7 +586,7 @@ function ObtenerResultadoCotizacionDetalleJavascript(pXML) {
 function CargaCotizacionHistoricaConIndiceDetacado(pIndex) {
 	if (reqCotHistoricas == '') {
 		$.ajax({
-			type: "POST",
+			type: "GET",
 			url: wsUrlCotizacionHistorico,
 			contentType: "application/xml; charset=utf-8",
 			dataType: "xml",
@@ -663,7 +672,7 @@ function CargaTodasCotizaciones() {
 		//TUNING-PERFORMANCE
 		if (reqCotizaciones.length == 0 || !localStorage.getItem("storagereqCotizaciones")) { //Ya fue cargado
 			$.ajax({
-				type: "POST",
+				type: "GET",
 				url: wsUrlCotizacion,
 				contentType: "application/xml; charset=utf-8", //"text/xml",
 				dataType: "xml",
@@ -751,7 +760,7 @@ function CargarParametroEntradaNovedades(pFechaDesde, pFechaHasta, pCodigoCatego
 function CargaNovedades() {
     if (isCargarNotificaciones || !localStorage.getItem("storageListaNovedades")) {
         $.ajax({
-            type: "POST",
+            type: "GET",
             url: wsUrlNovedades,
             contentType: "application/xml; charset=utf-8", //"text/xml",
             dataType: "xml",
@@ -808,7 +817,7 @@ function ObtenerNovedades(pXML) {
 function CargaUltimoInforme() {
     if (isCargarInformes || !localStorage.getItem("storageListaInformes")) {
         $.ajax({
-            type: "POST",
+            type: "GET",
             url: wsUrlInforme,
             contentType: "application/xml; charset=utf-8", //"text/xml",
             dataType: "xml",
