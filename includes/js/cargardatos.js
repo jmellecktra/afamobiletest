@@ -6,36 +6,12 @@ var wsUrlAuditoria = "http://concentrador.afascl.coop:38080/Concentrador/webserv
 var wsUrlInforme = "http://concentrador.afascl.coop:38080/Concentrador/webservices/InformeService?wsdl/";
 var wsUrlGuardarTelefono = "http://concentrador.afascl.coop:38080/Concentrador/webservices/TelefonoService?wsdl/";
 */
-
-/* EN CACHE */
-
-// http://localhost/cachexml/
-
-/*
-var wsUrlCotizacion =          "http://localhost/cachexml/CotizacionCerealPuertoService.xml";
-var wsUrlCotizacionHistorico = "http://localhost/cachexml/CotizacionCerealPuertoService.xml";
-var wsUrlNovedades =           "http://localhost/cachexml/NotificacionService.xml";
-var wsUrlAuditoria =           "http://localhost/cachexml/AuditoriaService.xml";
-var wsUrlInforme =             "http://localhost/cachexml/InformeService.xml";
-*/
-
-/*
-var wsUrlCotizacion =          "http://www.eigadmin.com.ar/web/afa_cache_xml/CotizacionCerealPuertoService.xml";
-var wsUrlCotizacionHistorico = "http://www.eigadmin.com.ar/web/afa_cache_xml/CotizacionCerealPuertoService.xml";
-var wsUrlNovedades =           "http://www.eigadmin.com.ar/web/afa_cache_xml/NotificacionService.xml";
-var wsUrlAuditoria =           "http://www.eigadmin.com.ar/web/afa_cache_xml/AuditoriaService.xml";
-var wsUrlInforme =             "http://www.eigadmin.com.ar/web/afa_cache_xml/InformeService.xml";
-*/
-
-
 var wsUrlCotizacion = "http://concentrador.afascl.coop:8080/Concentrador/webservices/CotizacionCerealPuertoService?wsdl/";
 var wsUrlCotizacionHistorico = "http://concentrador.afascl.coop:8080/Concentrador/webservices/CotizacionCerealPuertoService?wsdl/";
 var wsUrlNovedades = "http://concentrador.afascl.coop:8080/Concentrador/webservices/NotificacionService?wsdl/";
 var wsUrlAuditoria = "http://concentrador.afascl.coop:8080/Concentrador/webservices/AuditoriaService?wsdl/";
 var wsUrlInforme = "http://concentrador.afascl.coop:8080/Concentrador/webservices/InformeService?wsdl/";
-
 var wsUrlGuardarTelefono = "http://concentrador.afascl.coop:8080/Concentrador/webservices/TelefonoService?wsdl/";
-
 var wsUrlRegistracionTelefono = 'http://190.210.143.156:50002/registrationinfo/';
 
 var cotizacionesDestacada = null;
@@ -174,7 +150,7 @@ function processSuccessGuardarTelefono(data, status, req) {
 
 function CargarAuditoria() {
     listaTablaModificaciones = null;
-	t = setInterval(timeController, 1000);
+	//t = setInterval(timeController, 1000);
     $.ajax({
         type: "POST",
         url: wsUrlAuditoria,
@@ -190,7 +166,7 @@ function CargarAuditoria() {
 
 function defineLoadUpdates() {
 	var labelTableStorage = "storageTablaModificaciones";
-	var update = false;
+	var update = false;	
 	for (var i = 0; i < listaTablaModificaciones.length; i++) {
 		//alert(i+1);
 		//console.log(listaTablaModificaciones[i]);
@@ -203,11 +179,6 @@ function defineLoadUpdates() {
 			var updateStorage = localStorage.getItem(tableNameKey);
 			var updateStorageObject = eval('(' + updateStorage + ')');
 			storageDate = obtenerFechaUTC(updateStorageObject.fecha, updateStorageObject.hora);
-			/*var d = new Date(newDate);
-			alert('fecha Nueva => '+d);
-			d = new Date(storageDate);
-			alert('fecha Guardada => '+d);*/
-			//alert(newDate + ' ' +  storageDate);
 			if (newDate != storageDate) {
 				update = true;
 				localStorage.setItem(tableNameKey, JSON.stringify(listaTablaModificaciones[i]));
@@ -215,8 +186,8 @@ function defineLoadUpdates() {
 		}
 		switch (listaTablaModificaciones[i].codigoTabla) {
 			case 1: isCargarCotizaciones = update; break;
-			case 2: listaNovedades = update; break;
-			case 3: listaInformes = update; break;
+			case 2: isCargarNotificaciones = update; break; // listaNovedades = update; 
+			case 3: isCargarInformes = update; break; //listaInformes = update; 
 			default: processError('', 20004, ''); // unknow update
 		}
 	}
@@ -224,45 +195,52 @@ function defineLoadUpdates() {
 
 function timeController() {
 	if (startTime == startTimeOut) {
-		//console.log('Inicia los ' + startTimeOut + 'seg de espera de la carga')
-		//UPDATE-PERFORMANCE
-		//CargaCotizacionDestacada(); // timeOutCallbacks[0]
-		//CargaNovedades(); // timeOutCallbacks[1]	
-		//CargaTodasCotizaciones(); // timeOutCallbacks[2]	
-		//CargaUltimoInforme(); // timeOutCallbacks[3]
 		CargaNovedades(); // timeOutCallbacks[0]				
-		//CargaCotizacionDestacada(); // timeOutCallbacks[1]
-		//CargaUltimoInforme(); // timeOutCallbacks[2]
-		//CargaTodasCotizaciones(); // timeOutCallbacks[2]
 	}
 	startTime--;
 
 	var timeOut = 1;
 	//Si hay al menos un módulo cargado, se puede ocultar el bloque de espera general.
-	for (var i = 0; i < 2; i++) {//i <  timeOutCallbacks.length
+	for (var i = 0; i < 1; i++) {//i <  timeOutCallbacks.length
 		timeOut *= parseInt(timeOutCallbacks[i]);
 	}
-
-
-//
+	
+	
 	if ((startTimeOut-startTime) > (startTimeOut/2)) {
 		$('#alertavelocidad').css('display', 'block');
 	}
 	//$('#alertavelocidad').css('display', 'block');
 	if (startTime == 1) {
-		clearTimeout(t);
+		window.clearTimeout(t);
 		OcultarDivBloqueo();
 		if (timeOut == 0) {
 			//alert("TIMEOUT");
 			processError('', 5000, '');
 		}
 	} else {
-		if (timeOut == 1) {
-			clearTimeout(t);
+		if (timeOut == 1) {			
+			window.clearTimeout(t);	
+			callswipper();
+			//setTimeout(function(){ callswipper(); }, 1000);
 			OcultarDivBloqueo();
 			//console.log('Tardo en cargar la info necesaria ==> ' + startTime + 'seg');
 		}
 	}
+}
+
+function callswipper() {
+	try {
+		//CargarDeNuevoHistorico();	
+		swiper.removeSlide(2);
+		porcentajeArriba = 0.55;
+        porcentajeAbajo = 0.45;
+        onresizeBody();		
+	}
+	catch(err) {
+		//document.getElementById("error").innerHTML = err.message;
+	}
+	
+	
 }
 
 function successAuditoria(data, status, req) {
@@ -274,13 +252,7 @@ function successAuditoria(data, status, req) {
 	isCargarCotizaciones = true;
 	isCargarNotificaciones = true;
 	isCargarInformes = true;
-
-	// Obtener las actualizaciones y analizarlas
 	CargarResultadoAuditoriaJavascript(req.responseText);
-	
-	//var xmltest = '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body><ns2:consultaModificacionesResponse xmlns:ns2="http://www.afascl.coop/servicios"><return><codigoResultado>0</codigoResultado><descripcionResultado>Consulta de modificaciones (Auditoría) con Éxito </descripcionResultado><modificaciones><codigoTabla>1</codigoTabla><fecha>21/08/2015</fecha><hora>16:55:48</hora></modificaciones><modificaciones><codigoTabla>2</codigoTabla><fecha>21/08/2015</fecha><hora>14:39:20</hora></modificaciones><modificaciones><codigoTabla>3</codigoTabla><fecha>20/08/2015</fecha><hora>16:37:50</hora></modificaciones><error/></return></ns2:consultaModificacionesResponse></soap:Body></soap:Envelope>';
-	//CargarResultadoAuditoriaJavascript(xmltest);
-	
 	if (listaTablaModificaciones && (listaTablaModificaciones.length > 0)) {
 		// Hay actualizaciones, definir si las mismas son diferentes que las almacenadas
 		defineLoadUpdates();
@@ -330,6 +302,7 @@ function CargarResultadoAuditoriaJavascript(pXML) {
 }
 
 function CargaCotizacionDestacada() {
+	
     if (isCargarCotizaciones || !localStorage.getItem("storageListaCotizacionesDestacada")) {
         $.ajax({
             type: "POST",
@@ -514,53 +487,7 @@ function processSuccessDetalleCotizacion(data, status, req) {
 	} else {
 		processError('', 1000, '');
 	}	
-//	cotizacionesDestacada[indexCotizacionesDestacada].listaDetalle = ObtenerResultadoCotizacionDetalleJavascript(req.responseText);
-//	if ((cotizacionesDestacada.length - 1) > indexCotizacionesDestacada) {
-//		indexCotizacionesDestacada++;
-//		CargaConIndiceDetalleCotizacion(indexCotizacionesDestacada);
-//	} else {
-//		indexCotizacionesDestacada = 0;
-//		if (cotizacionesDestacada.length > 0) {
-//			CargaCotizacionHistoricaConIndiceDetacado(indexCotizacionesDestacada);
-//		}
-//	}
 }
-
-/* ORIGINAL
-
-function CargaConIndiceDetalleCotizacion(pIndex) {
-		$.ajax({
-			type: "POST",
-			url: wsUrlCotizacion,
-			contentType: "application/xml; charset=utf-8", //"text/xml",
-			dataType: "xml",
-			crossDomain: true,
-			xhrFields: {
-				withCredentials: true
-			},
-			data: CargarParametroEntradaCotizaciones_Ordenada(1, 11, obtenerFechaParametroEntrada(0), '', '', cotizacionesDestacada[pIndex].codigoProducto, '', ''),
-			success: processSuccessDetalleCotizacion
-		});
-}
-function processSuccessDetalleCotizacion(data, status, req) {
-	cotizacionesDestacada[indexCotizacionesDestacada].listaDetalle = ObtenerResultadoCotizacionDetalleJavascript(req.responseText);
-	if ((cotizacionesDestacada.length - 1) > indexCotizacionesDestacada) {
-		indexCotizacionesDestacada++;
-		CargaConIndiceDetalleCotizacion(indexCotizacionesDestacada);
-	} else {
-		indexCotizacionesDestacada = 0;
-		if (cotizacionesDestacada.length > 0) {
-			CargaCotizacionHistoricaConIndiceDetacado(indexCotizacionesDestacada);
-		}
-	}
-}
-*/
-
-
-
-
-
-
 
 function ObtenerResultadoCotizacionDetalleJavascript(pXML) {
     var cotizacionesDetalle = [];
@@ -596,11 +523,6 @@ function CargaCotizacionHistoricaConIndiceDetacado(pIndex) {
 			xhrFields: {
 				withCredentials: true
 			},
-			//data: CargarParametroEntradaCotizaciones(1, 11, obtenerFechaParametroEntrada(-10), obtenerFechaParametroEntrada(0), cotizacionesDestacada[pIndex].codigoProducto, cotizacionesDestacada[pIndex].codigoPuerto, ''),
-			//"Por Fecha Descendente"
-			//data: CargarParametroEntradaCotizaciones_Ordenada(1, 11, obtenerFechaParametroEntrada(-10), obtenerFechaParametroEntrada(0), 8, cotizacionesDestacada[pIndex].codigoProducto, cotizacionesDestacada[pIndex].codigoPuerto, ''),
-			//data: CargarParametroEntradaCotizaciones_Ordenada(1, 11, obtenerFechaParametroEntrada(-10), obtenerFechaParametroEntrada(0), 9, cotizacionesDestacada[pIndex].codigoProducto, '', ''),
-			// ***** CESAR *****
 			data: CargarParametroEntradaCotizaciones_Ordenada(1, 11, obtenerFechaParametroEntrada(-10), obtenerFechaParametroEntrada(0), 9, '', '', ''),
 			success: processSuccessCotizacionHistorica
 		});
@@ -648,8 +570,6 @@ function processSuccessCotizacionHistorica(data, status, req) {
 		CargarCotizacionesDestacadaHtml();
 	}
 }
-
-//Agregada por César
 function processSuccessCotizacionHistoricaBis(req) {
 	cotizacionesDestacada[indexCotizacionesDestacada].listaHistorico = ObtenerCotizacionHistoricaConIndiceProductoDestacado(req.responseText);
 	if ((cotizacionesDestacada.length - 1) > indexCotizacionesDestacada) {
@@ -663,7 +583,7 @@ function processSuccessCotizacionHistoricaBis(req) {
 			processError('', 1000, '');
 		}
 		CargarCotizacionesDestacadaHtml();
-		clearTimeout(t);
+		window.clearTimeout(t);
 		// Por Swiper CargaUltimoInforme();
 	}
 }
@@ -774,14 +694,8 @@ function CargaNovedades() {
             success: processSuccessNovedades
         });
     } else {
-		if (!localStorage.getItem("storageListaNovedades")) {
-			processError('', 1000, '');
-		}
-		var listaNovedadesGuardada = localStorage.getItem("storageListaNovedades");
-		listaNovedades = eval('(' + listaNovedadesGuardada + ')');
-
-        CargarNovedadesHtml();
-		CargaCotizacionDestacada();
+		timeOutCallbacks[0] = 1;
+        CargaUltimoInforme();
     }
 }
 
@@ -796,8 +710,7 @@ function processSuccessNovedades(data, status, req) {
 	
 	timeOutCallbacks[0] = 1;
 	CargaUltimoInforme();
-	//Sweeper CargaCotizacionDestacada();
-	//CargarNovedadesHtml();	
+
 }
 
 function ObtenerNovedades(pXML) {
@@ -825,23 +738,15 @@ function CargaUltimoInforme() {
             dataType: "xml",
             crossDomain: true,
             xhrFields: {
-                // The 'xhrFields' property sets additional fields on the XMLHttpRequest.
-                // This can be used to set the 'withCredentials' property.
-                // Set the value to 'true' if you'd like to pass cookies to the server.
-                // If this is enabled, your server must respond with the header
-                // 'Access-Control-Allow-Credentials: true'.
                 withCredentials: true
             },
             data: CargarParametroEntradaInforme('', '', 1),
             success: processSuccessInforme
         })
     } else {
-		if (!localStorage.getItem("storageListaInformes")) {
-			processError('', 1000, '');
-		}
-		var listaInformesGuardada = localStorage.getItem("storageListaInformes");
-		listaInformes = eval('(' + listaInformesGuardada + ')');
-		timeOutCallbacks[2] = 1;
+		timeOutCallbacks[2] = 1;		
+		CargarNovedadesHtml();
+		CargaCotizacionDestacada();
 	}
 }
 
@@ -875,6 +780,7 @@ function processSuccessInforme(data, status, req) {
 	} else {
 		processError('', 1000, '');
 	}
+	timeOutCallbacks[2] = 1;
 	CargarNovedadesHtml();
 	CargaCotizacionDestacada();
 }

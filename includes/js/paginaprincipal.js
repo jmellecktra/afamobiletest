@@ -187,7 +187,7 @@ function CargarCotizacionesDestacadaHtml() {
             cantValorMoneda = cantValorMonedaAUX;
         }
     }
-    //alert(cantValorMoneda);
+
 	var index = -1;
     $(cotizacionesDestacada).each(function () {
         index++;
@@ -232,47 +232,7 @@ function CargarCotizacionesDestacadaHtml() {
         resultadoDiv += '</div>';
         resultadoDiv += '<div class="accordion-body collapse" id="collapse' + index + '" style="height: 0px;">';
         resultadoDiv += '<div class="accordion-inner">';
-        // detalle
-		/*
-        if (this.listaDetalle.length > 0) {
-            // Encabezado detalle
-            resultadoDiv += '<div class="row">';
-            resultadoDiv += '<div class="row cssDetalleEncabezado">';
-            resultadoDiv += '<div class="col-xs-4">';
-            resultadoDiv += 'PUERTO';
-            resultadoDiv += '</div>';
-            resultadoDiv += '<div class="col-xs-4">';
-            resultadoDiv += 'PRECIO P/TN';
-            resultadoDiv += '</div>';
-            resultadoDiv += '<div class="col-xs-4">';
-            resultadoDiv += 'OBSERVACI&#211;N';
-            resultadoDiv += '</div>';
-            resultadoDiv += '</div>';
-            // fin Encabezado detalle
-        }
-        for (var iDetalle = 0; iDetalle < this.listaDetalle.length; iDetalle++) {
-            var strHtmlColorFondo = '';
-            if(this.codigoProducto==this.listaDetalle[iDetalle].codigoProducto){
-				if (iDetalle % 2 != 0) {
-					strHtmlColorFondo = ' cssDetalleImpar ';
-				}
-				resultadoDiv += '<div class="row cssDetalle' + strHtmlColorFondo + '">';
-				resultadoDiv += '<div class="col-xs-4 colDetalleDescripcionPuerto">';
-				resultadoDiv += this.listaDetalle[iDetalle].descripcionPuerto;
-				resultadoDiv += '</div>';
-				resultadoDiv += '<div class="col-xs-4 colDetallePrecio">';
-	
-				resultadoDiv += this.listaDetalle[iDetalle].abreviaturaMoneda + ' ' + this.listaDetalle[iDetalle].valorString;
-				resultadoDiv += '</div>';
-				resultadoDiv += '<div class="col-xs-4 colDetalleObservacion">';
-				resultadoDiv += this.listaDetalle[iDetalle].observacion;
-				resultadoDiv += '</div>';
-				resultadoDiv += '</div>';
-			}
-        }
-		*/
-		
-		// *** CESAR ***
+ 
 		var encprint = 0; //Variable para saber si ya pasó una vez
 		if (!localStorage.getItem("storagereqCotizaciones")) {
 			//alert('storageListaCotizacionesDestacada is null');
@@ -317,6 +277,7 @@ function CargarCotizacionesDestacadaHtml() {
 				resultadoDiv += '</div>';
 				resultadoDiv += '</div>';
 			}
+			
         }
         resultadoDiv += '</div>';
         // fin detalle
@@ -342,40 +303,37 @@ function CargarCotizacionesDestacadaHtml() {
         var index = parseInt(e.target.id.replace('collapse', ''));
         grabarStorageIndexCotizacionDestacadaSeleccionda(index);
         CargarCotizacionesHistoricaHtml(index);
-        var indexSlide2 = -1;
+        var indexSlide3 = -1;
         for (var i = 0; i < swiper.slides.length; i++) {
-            if (swiper.slides[i].id == 'swiper-slide2') {
-                indexSlide2 = i;
+            if (swiper.slides[i].id == 'swiper-slide3') {
+                indexSlide3 = i;
             }
         }
-        if (indexSlide2 != -1) {
-            swiper.slideTo(indexSlide2);
-            //            setTimeout(function () {
-            //                swiper.slideTo(indexSlide2);
-            //            }, 200);
+        if (indexSlide3 != -1) {
+            swiper.slideTo(indexSlide3);
         }
-        onresizeBody();
-        //   $('#swiper-slide2').scrollTop(0);
+		onresizeBody();
         setTimeout(function () {
             CargarDeNuevoHistorico();
         }, 500);
+		
     });
 
     $('.collapse').on('hide.bs.collapse', function (e) {
-        var indexSlide3 = -1;
         var indexSlide2 = -1;
+        var indexSlide3 = -1;
         var indexSlide1 = -1;
         for (var i = 0; i < swiper.slides.length; i++) {
-            if (swiper.slides[i].id == 'swiper-slide2') {
-                indexSlide2 = i;
-            } else if (swiper.slides[i].id == 'swiper-slide3') {
+            if (swiper.slides[i].id == 'swiper-slide3') {
                 indexSlide3 = i;
+            } else if (swiper.slides[i].id == 'swiper-slide2') {
+                indexSlide2 = i;
             } else if (swiper.slides[i].id == 'swiper-slide1') {
                 indexSlide1 = i;
             }
         }
-        if (indexSlide2 != -1) {
-            swiper.removeSlide(indexSlide2);
+        if (indexSlide3 != -1) {
+            swiper.removeSlide(indexSlide3);
         }
         if (indexSlide1 != -1) {
             swiper.slideTo(indexSlide1);
@@ -385,6 +343,7 @@ function CargarCotizacionesDestacadaHtml() {
             porcentajeAbajo = 0;
             onresizeBody();
         }
+
     });
     onresizeBody();
 
@@ -403,25 +362,29 @@ function CargarDeNuevoHistorico() {
 }
 
 function CargarInformeCierreMercado() {
-	if (!listaInformes) {
+	if (!localStorage.getItem("storageListaInformes")) {
 		processError('', 1000, '');
-		return;
 	}
+	var listaInformesGuardada = localStorage.getItem("storageListaInformes");
+	listaInformes = eval('(' + listaInformesGuardada + ')');		
 
     var isTimeoutInformeCierreMercado = true;
 	if (listaInformes.length > 0) {
 		isTimeoutInformeCierreMercado = false;
-		var indexSlide3 = -1;
+		var indexSlide2 = -1;
 		for (var i = 0; i < swiper.slides.length; i++) {
-			if (swiper.slides[i].id == 'swiper-slide3') {
-				indexSlide3 = i;
+			if (swiper.slides[i].id == 'swiper-slide2') {
+				indexSlide2 = i;
 			}
 		}
-		if (indexSlide3 == -1) {
-			swiper.appendSlide('<div id="swiper-slide3" class="swiper-slide">' + CargarInformeHtml() + '</div>');
+		if (indexSlide2 == -1) {
+			swiper.appendSlide('<div id="swiper-slide2" class="swiper-slide">' + CargarInformeHtml() + '</div>');
 		} else {
-			$('#swiper-slide3').html(CargarInformeHtml());
+			$('#swiper-slide2').html(CargarInformeHtml());
 		}
+		if (swiper.slides.length==2) {
+			swiper.appendSlide('<div id="swiper-slide3" class="swiper-slide"></div>');			
+		}		
 	}
 
     if (isTimeoutInformeCierreMercado) {
@@ -494,15 +457,15 @@ function CargarCotizacionesHistoricaHtml(pIndex) {
     }
     var isAgregarSlides2 = true;
     for (var i = 0; i < swiper.slides.length; i++) {
-        if (swiper.slides[i].id == 'swiper-slide2') {
+        if (swiper.slides[i].id == 'swiper-slide3') {
             isAgregarSlides2 = false;
             break;
         }
     }
     if (isAgregarSlides2) {
-        swiper.appendSlide('<div id="swiper-slide2" class="swiper-slide">' + resultadoDiv + '</div>');
+        swiper.appendSlide('<div id="swiper-slide3" class="swiper-slide">' + resultadoDiv + '</div>');
     } else {
-        $('#swiper-slide2').html(resultadoDiv);
+        $('#swiper-slide3').html(resultadoDiv);
     }
     if (cotizacionesDestacada[pIndex].listaHistorico.length > 0) {
         porcentajeArriba = 0.55;
@@ -512,10 +475,13 @@ function CargarCotizacionesHistoricaHtml(pIndex) {
 }
 
 function CargarNovedadesHtml() {
-	if (!listaNovedades || (listaNovedades && listaNovedades.length == 0)) {
+	if (!localStorage.getItem("storageListaNovedades")) {
 		processError('', 1000, '');
-		return;
 	}
+
+	var listaNovedadesGuardada = localStorage.getItem("storageListaNovedades");
+	listaNovedades = eval('(' + listaNovedadesGuardada + ')');
+
     var resultadoDiv = '<div id="divRowParteScrollNovedades">'; // parte scroll      
 	var indiceNovedades = -1;
 	$(listaNovedades).each(function () {
@@ -566,9 +532,8 @@ function CargarNovedadesHtml() {
 		resultadoDiv += '</div>';
 	});
 	resultadoDiv += '</div>'; // fin parte scroll
-
+	
 	if (listaNovedades.length > 0) {
-
 		var indexSlide1 = -1;
 		for (var i = 0; i < swiper.slides.length; i++) {
 			if (swiper.slides[i].id == 'swiper-slide1') {
@@ -581,9 +546,10 @@ function CargarNovedadesHtml() {
 			$('#swiper-slide1').html(resultadoDiv);
 		}
 	}
-
-    CargarInformeCierreMercado();
 	timeOutCallbacks[0] = 1;
+	OcultarDivBloqueo();
+    CargarInformeCierreMercado();
+	
 }
 
 function CargarInformeHtml() {
@@ -615,9 +581,9 @@ function onclickFullScreenCotizacionesHistorica() {
 function onclickFullScreenButtonAmpliar() {
     if (swiper.slides[swiper.activeIndex].id == 'swiper-slide1') {
         window.location.href = "novedades.html";
-    } else if (swiper.slides[swiper.activeIndex].id == 'swiper-slide2') {
-        window.location.href = "todascotizacioneshistorica.html";
     } else if (swiper.slides[swiper.activeIndex].id == 'swiper-slide3') {
+        window.location.href = "todascotizacioneshistorica.html";
+    } else if (swiper.slides[swiper.activeIndex].id == 'swiper-slide2') {
         window.location.href = "informe.html";
     }
 }

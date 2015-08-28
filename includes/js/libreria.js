@@ -244,6 +244,7 @@ function MostrarDivBloqueo() {
 function OcultarDivBloqueo() {
     $('#divFondoBloqueo').css('display', 'none');
     $('#divFondoBloqueo').css('opacity', '1');
+	
 }
 
 function ActualizarAltoFondoBloqueo() {
@@ -444,15 +445,6 @@ function CargarVentanaAlertaNotification(pTitulo, pDescripcion) {
 /* Inicio Actualizar */
 function onclickActualizar() {
 	//Forzar vaciado de localstorage
-//	localStorage.clear('storageListaCotizacionesDestacada');
-//	localStorage.clear('storagereqCotizaciones');
-//	localStorage.clear('storageListaTodasCotizaciones');
-//	localStorage.clear('storageListaNovedades');
-//	localStorage.clear('storageListaInformes');
-//	localStorage.clear('storageTablaModificaciones1');
-//	localStorage.clear('storageTablaModificaciones2');
-//	localStorage.clear('storageTablaModificaciones3');
-//	localStorage.clear('storageFechaCotizaciones');
 	var telefono = localStorage.getItem("storageTelefono");
 	localStorage.clear();
 	localStorage.setItem("storageTelefono", telefono);
@@ -518,12 +510,13 @@ function getAppVersion() {
 	return html;
 }
 
+
+
 $(document).ready(function () {
     $.ajaxSetup({
         error: function( jqXHR, textStatus, errorThrown ) {
 				var error_id = 50; // unknown
 				if (jqXHR.status === 0) {
-					//alert('Not connect: Verify Network.');
 					error_id = 100;
 				} else if (jqXHR.status == 404) {
 					//alert('Requested page not found [404]');
@@ -544,12 +537,12 @@ $(document).ready(function () {
 					//alert('Uncaught Error: ' + jqXHR.responseText);
 					error_id = 160;
 			   }
-
 			   window.location.href = "error.html?id=" + error_id;
 			}
     });
-
 });
+
+
 
 function mobileEventsHandler(event) {
 	//alert(event.target.isIndex);
