@@ -7,27 +7,11 @@ var wsUrlInforme = "http://concentrador.afascl.coop:38080/Concentrador/webservic
 var wsUrlGuardarTelefono = "http://concentrador.afascl.coop:38080/Concentrador/webservices/TelefonoService?wsdl/";
 */
 
-
-var random = Math.floor(Math.random() * 50) + 1 ;
-var idRan = "?idr=" + random;
-
-/* ESTÁTICO */
-
-var wsUrlCotizacion = "http://www.afascl.coop/ws/CotizacionCerealPuertoService.xml" + idRan;
-var wsUrlCotizacion2 = "http://www.afascl.coop/ws/CotizacionCerealPuertoService2.xml" + idRan;
-var wsUrlCotizacionHistorico = "http://www.afascl.coop/ws/CotizacionCerealPuertoService3.xml" + idRan;
-var wsUrlNovedades = "http://www.afascl.coop/ws/NotificacionService.xml" + idRan;
-var wsUrlAuditoria = "http://www.afascl.coop/ws/AuditoriaService.xml" + idRan;
-var wsUrlInforme = "http://www.afascl.coop/ws/InformeService.xml" + idRan;
-
-
-/*
 var wsUrlCotizacion = "http://concentrador.afascl.coop:8080/Concentrador/webservices/CotizacionCerealPuertoService?wsdl/";
 var wsUrlCotizacionHistorico = "http://concentrador.afascl.coop:8080/Concentrador/webservices/CotizacionCerealPuertoService?wsdl/";
 var wsUrlNovedades = "http://concentrador.afascl.coop:8080/Concentrador/webservices/NotificacionService?wsdl/";
 var wsUrlAuditoria = "http://concentrador.afascl.coop:8080/Concentrador/webservices/AuditoriaService?wsdl/";
 var wsUrlInforme = "http://concentrador.afascl.coop:8080/Concentrador/webservices/InformeService?wsdl/";
-*/
 var wsUrlGuardarTelefono = "http://concentrador.afascl.coop:8080/Concentrador/webservices/TelefonoService?wsdl/";
 var wsUrlRegistracionTelefono = 'http://190.210.143.156:50002/registrationinfo/';
 
@@ -169,15 +153,13 @@ function CargarAuditoria() {
     listaTablaModificaciones = null;
 	//t = setInterval(timeController, 1000);
     $.ajax({
-        type: "GET",
+        type: "POST",
         url: wsUrlAuditoria,
-/*        
         contentType: "application/xml; charset=utf-8",
         dataType: "xml",
         crossDomain: true,		
         xhrFields: { withCredentials: true },
         data: CargarParametroEntradaAuditoria(),
-*/        
         success: successAuditoria
     });
 	
@@ -319,15 +301,13 @@ function CargaCotizacionDestacada() {
 	
     if (isCargarCotizaciones || !localStorage.getItem("storageListaCotizacionesDestacada")) {
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: wsUrlCotizacion,
-            /*
             contentType: "application/xml; charset=utf-8",
             dataType: "xml",
             crossDomain: true,
             xhrFields: { withCredentials: true },
             data: CargarParametroEntradaCotizaciones_Ordenada(1, 14, obtenerFechaParametroEntrada(0), '', '', '', '', ''),
-            */
             success: processSuccessCotizacionDestacada
         });
     } else {
@@ -476,9 +456,8 @@ function CargarParametroEntradaCotizaciones(pCodigoTipoCotizacion, pCodigoTipoCl
 // *** CESAR *** 
 function CargaConIndiceDetalleCotizacion(pIndex) {
 		$.ajax({
-			type: "GET",
-			url: wsUrlCotizacion2,
-            /*
+			type: "POST",
+			url: wsUrlCotizacion,
 			contentType: "application/xml; charset=utf-8", //"text/xml",
 			dataType: "xml",
 			crossDomain: true,
@@ -486,7 +465,6 @@ function CargaConIndiceDetalleCotizacion(pIndex) {
 				withCredentials: true
 			},
 			data: CargarParametroEntradaCotizaciones_Ordenada(1, 11, obtenerFechaParametroEntrada(0), '', '', '', '', ''),
-            */
 			success: processSuccessDetalleCotizacion
 		});
 }
@@ -533,9 +511,8 @@ function ObtenerResultadoCotizacionDetalleJavascript(pXML) {
 function CargaCotizacionHistoricaConIndiceDetacado(pIndex) {
 	if (reqCotHistoricas == '') {
 		$.ajax({
-			type: "GET",
+			type: "POST",
 			url: wsUrlCotizacionHistorico,
-            /*
 			contentType: "application/xml; charset=utf-8",
 			dataType: "xml",
 			crossDomain: true,
@@ -543,7 +520,6 @@ function CargaCotizacionHistoricaConIndiceDetacado(pIndex) {
 				withCredentials: true
 			},
 			data: CargarParametroEntradaCotizaciones_Ordenada(1, 11, obtenerFechaParametroEntrada(-10), obtenerFechaParametroEntrada(0), 9, '', '', ''),
-            */
 			success: processSuccessCotizacionHistorica
 		});
 	} else {
@@ -614,7 +590,7 @@ function CargaTodasCotizaciones() {
 		//TUNING-PERFORMANCE
 		if (reqCotizaciones.length == 0 || !localStorage.getItem("storagereqCotizaciones")) { //Ya fue cargado
 			$.ajax({
-				type: "GET",
+				type: "POST",
 				url: wsUrlCotizacion,
 				contentType: "application/xml; charset=utf-8", //"text/xml",
 				dataType: "xml",
@@ -702,9 +678,8 @@ function CargarParametroEntradaNovedades(pFechaDesde, pFechaHasta, pCodigoCatego
 function CargaNovedades() {
     if (isCargarNotificaciones || !localStorage.getItem("storageListaNovedades")) {
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: wsUrlNovedades,
-            /*
             contentType: "application/xml; charset=utf-8", //"text/xml",
             dataType: "xml",
             crossDomain: true,
@@ -712,7 +687,6 @@ function CargaNovedades() {
                 withCredentials: true
             },
             data: CargarParametroEntradaNovedades('', '', ''),
-            */
             success: processSuccessNovedades
         });
     } else {
@@ -754,9 +728,8 @@ function ObtenerNovedades(pXML) {
 function CargaUltimoInforme() {
     if (isCargarInformes || !localStorage.getItem("storageListaInformes")) {
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: wsUrlInforme,
-            /*
             contentType: "application/xml; charset=utf-8", //"text/xml",
             dataType: "xml",
             crossDomain: true,
@@ -764,7 +737,6 @@ function CargaUltimoInforme() {
                 withCredentials: true
             },
             data: CargarParametroEntradaInforme('', '', 1),
-            */
             success: processSuccessInforme
         })
     } else {
