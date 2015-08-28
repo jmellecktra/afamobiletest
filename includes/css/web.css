@@ -869,23 +869,26 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff354d', end
 /* Inicio informe */
 
 #swiper-slide3 {
-    padding-left: 1em;
+    /*padding-left: 1em;*/
 }
 
 .cssInformeTitulo {
     font-size: 1.5em;
     font-weight: 800;
     padding-top: 1em;
+    padding-left: 0.5em;
 }
 
 .cssInformeFecha {
     padding-bottom: 2em;
+    padding-left: 0.5em;
 }
 
 .cssInformeDescripcion {
     overflow-y: auto;
     padding-right: 1em;
     font-size: 1.15em !important;
+    padding-left: 0.5em;
 }
 
 .cssInformeDescripcion span {
