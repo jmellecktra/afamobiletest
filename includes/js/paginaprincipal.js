@@ -382,9 +382,7 @@ function CargarInformeCierreMercado() {
 		} else {
 			$('#swiper-slide2').html(CargarInformeHtml());
 		}
-		if (swiper.slides.length==2) {
-			swiper.appendSlide('<div id="swiper-slide3" class="swiper-slide"></div>');			
-		}		
+
 	}
 
     if (isTimeoutInformeCierreMercado) {
@@ -579,13 +577,20 @@ function onclickFullScreenCotizacionesHistorica() {
 }
 
 function onclickFullScreenButtonAmpliar() {
-    if (swiper.slides[swiper.activeIndex].id == 'swiper-slide1') {
-        window.location.href = "novedades.html";
-    } else if (swiper.slides[swiper.activeIndex].id == 'swiper-slide3') {
-        window.location.href = "todascotizacioneshistorica.html";
-    } else if (swiper.slides[swiper.activeIndex].id == 'swiper-slide2') {
-        window.location.href = "informe.html";
-    }
+	//Para validar que solo se pueda ampliar si se terminó de conectar con WS.
+	var staCon = 1;
+	for (var i = 0; i < timeOutCallbacks.length; i++) {
+		staCon *= parseInt(timeOutCallbacks[i]);
+	}		
+	if (staCon==1) {
+		if (swiper.slides[swiper.activeIndex].id == 'swiper-slide1') {
+			window.location.href = "novedades.html";
+		} else if (swiper.slides[swiper.activeIndex].id == 'swiper-slide3') {
+			window.location.href = "todascotizacioneshistorica.html";
+		} else if (swiper.slides[swiper.activeIndex].id == 'swiper-slide2') {
+			window.location.href = "informe.html";
+		}
+	}
 }
 
 function finCargarInicial() {

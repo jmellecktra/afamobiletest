@@ -209,12 +209,10 @@ function timeController() {
 	if ((startTimeOut-startTime) > (startTimeOut/2)) {
 		$('#alertavelocidad').css('display', 'block');
 	}
-	//$('#alertavelocidad').css('display', 'block');
 	if (startTime == 1) {
 		window.clearTimeout(t);
 		OcultarDivBloqueo();
 		if (timeOut == 0) {
-			//alert("TIMEOUT");
 			processError('', 5000, '');
 		}
 	} else {
@@ -223,15 +221,12 @@ function timeController() {
 			callswipper();
 			//setTimeout(function(){ callswipper(); }, 1000);
 			OcultarDivBloqueo();
-			//console.log('Tardo en cargar la info necesaria ==> ' + startTime + 'seg');
 		}
 	}
 }
 
 function callswipper() {
 	try {
-		//CargarDeNuevoHistorico();	
-		swiper.removeSlide(2);
 		porcentajeArriba = 0.55;
         porcentajeAbajo = 0.45;
         onresizeBody();		
