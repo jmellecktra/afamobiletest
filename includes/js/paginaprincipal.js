@@ -73,7 +73,7 @@ function CargaDeLosDatosPrevioTelefono() {
 		}
 
 		onresizeBody();
-		OcultarDivBloqueo();
+		//OcultarDivBloqueo();
 	} else if (varParametroUrl == '2') {
 		onclickActualizar();
 	}
@@ -294,7 +294,7 @@ function CargarCotizacionesDestacadaHtml() {
 
     resultadoDiv += '</div>';
     $('#divCotizacionesDestacada').html(resultadoDiv);
-
+	processFinal = 1;
     $('.collapse').on('show.bs.collapse', function (e) {
         $otherPanels = $(this).parents('.accordion-group').siblings('.accordion-group');
         $('.collapse', $otherPanels).removeClass('in');
@@ -346,7 +346,6 @@ function CargarCotizacionesDestacadaHtml() {
 
     });
     onresizeBody();
-
 	CargarHtmlFechaMenuPrincipal();
 	timeOutCallbacks[1] = 1;
 }
@@ -545,7 +544,7 @@ function CargarNovedadesHtml() {
 		}
 	}
 	timeOutCallbacks[0] = 1;
-	OcultarDivBloqueo();
+	//OcultarDivBloqueo();
     CargarInformeCierreMercado();
 	
 }

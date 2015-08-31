@@ -8,7 +8,7 @@ var wsUrlGuardarTelefono = "http://concentrador.afascl.coop:38080/Concentrador/w
 */
 
 
-var random = Math.floor(Math.random() * 50) + 1 ;
+var random = Math.floor(Math.random() * 1000) + 1 ;
 var idRan = "?idr=" + random;
 
 /* ESTÁTICO */
@@ -219,8 +219,11 @@ function timeController() {
 
 	var timeOut = 1;
 	//Si hay al menos un módulo cargado, se puede ocultar el bloque de espera general.
-	for (var i = 0; i < 1; i++) {//i <  timeOutCallbacks.length
+	for (var i = 0; i < timeOutCallbacks.length; i++) {//i <  timeOutCallbacks.length
 		timeOut *= parseInt(timeOutCallbacks[i]);
+	}
+	if (processFinal ==0) {
+		timeOut = 0;
 	}
 	
 	
@@ -602,7 +605,6 @@ function processSuccessCotizacionHistoricaBis(req) {
 			processError('', 1000, '');
 		}
 		CargarCotizacionesDestacadaHtml();
-		window.clearTimeout(t);
 		// Por Swiper CargaUltimoInforme();
 	}
 }
