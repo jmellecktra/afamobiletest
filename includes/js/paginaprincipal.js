@@ -73,7 +73,7 @@ function CargaDeLosDatosPrevioTelefono() {
 		}
 
 		onresizeBody();
-		//OcultarDivBloqueo();
+		OcultarDivBloqueo();
 	} else if (varParametroUrl == '2') {
 		onclickActualizar();
 	}
@@ -577,11 +577,7 @@ function onclickFullScreenCotizacionesHistorica() {
 
 function onclickFullScreenButtonAmpliar() {
 	//Para validar que solo se pueda ampliar si se terminó de conectar con WS.
-	var staCon = 1;
-	for (var i = 0; i < timeOutCallbacks.length; i++) {
-		staCon *= parseInt(timeOutCallbacks[i]);
-	}		
-	if (staCon==1) {
+
 		if (swiper.slides[swiper.activeIndex].id == 'swiper-slide1') {
 			window.location.href = "novedades.html";
 		} else if (swiper.slides[swiper.activeIndex].id == 'swiper-slide3') {
@@ -589,7 +585,7 @@ function onclickFullScreenButtonAmpliar() {
 		} else if (swiper.slides[swiper.activeIndex].id == 'swiper-slide2') {
 			window.location.href = "informe.html";
 		}
-	}
+
 }
 
 function finCargarInicial() {
