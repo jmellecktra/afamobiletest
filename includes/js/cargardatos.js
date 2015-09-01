@@ -1,3 +1,16 @@
+var random = Math.floor(Math.random() * 1000) + 1 ;
+var idRan = "?idr=" + random;
+var urlxml = "http://movil.afascl.coop/ws/";
+
+/* ESTÁTICO */
+var wsUrlCotizacion = urlxml + "CotizacionCerealPuertoService.xml" + idRan;
+var wsUrlCotizacion2 = urlxml + "CotizacionCerealPuertoService2.xml" + idRan;
+var wsUrlCotizacionHistorico = urlxml + "CotizacionCerealPuertoService3.xml" + idRan;
+var wsUrlNovedades = urlxml + "NotificacionService.xml" + idRan;
+var wsUrlAuditoria = urlxml + "AuditoriaService.xml" + idRan;
+var wsUrlInforme = urlxml + "InformeService.xml" + idRan;
+
+/* ENTORNO DE TEST XML DINAMICO */
 /*
 var wsUrlCotizacion = "http://concentrador.afascl.coop:38080/Concentrador/webservices/CotizacionCerealPuertoService?wsdl/";
 var wsUrlCotizacionHistorico = "http://concentrador.afascl.coop:38080/Concentrador/webservices/CotizacionCerealPuertoService?wsdl/";
@@ -6,20 +19,7 @@ var wsUrlAuditoria = "http://concentrador.afascl.coop:38080/Concentrador/webserv
 var wsUrlInforme = "http://concentrador.afascl.coop:38080/Concentrador/webservices/InformeService?wsdl/";
 var wsUrlGuardarTelefono = "http://concentrador.afascl.coop:38080/Concentrador/webservices/TelefonoService?wsdl/";
 */
-
-
-var random = Math.floor(Math.random() * 1000) + 1 ;
-var idRan = "?idr=" + random;
-
-/* ESTÁTICO */
-var wsUrlCotizacion = "http://www.afascl.coop/ws/CotizacionCerealPuertoService.xml" + idRan;
-var wsUrlCotizacion2 = "http://www.afascl.coop/ws/CotizacionCerealPuertoService2.xml" + idRan;
-var wsUrlCotizacionHistorico = "http://www.afascl.coop/ws/CotizacionCerealPuertoService3.xml" + idRan;
-var wsUrlNovedades = "http://www.afascl.coop/ws/NotificacionService.xml" + idRan;
-var wsUrlAuditoria = "http://www.afascl.coop/ws/AuditoriaService.xml" + idRan;
-var wsUrlInforme = "http://www.afascl.coop/ws/InformeService.xml" + idRan;
-
-
+/* ENTORNO DE PRODUCCION XML DINAMICO */
 /*
 var wsUrlCotizacion = "http://concentrador.afascl.coop:8080/Concentrador/webservices/CotizacionCerealPuertoService?wsdl/";
 var wsUrlCotizacionHistorico = "http://concentrador.afascl.coop:8080/Concentrador/webservices/CotizacionCerealPuertoService?wsdl/";
@@ -27,6 +27,7 @@ var wsUrlNovedades = "http://concentrador.afascl.coop:8080/Concentrador/webservi
 var wsUrlAuditoria = "http://concentrador.afascl.coop:8080/Concentrador/webservices/AuditoriaService?wsdl/";
 var wsUrlInforme = "http://concentrador.afascl.coop:8080/Concentrador/webservices/InformeService?wsdl/";
 */
+
 var wsUrlGuardarTelefono = "http://concentrador.afascl.coop:8080/Concentrador/webservices/TelefonoService?wsdl/";
 var wsUrlRegistracionTelefono = 'http://190.210.143.156:50002/registrationinfo/';
 

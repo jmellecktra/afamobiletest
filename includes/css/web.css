@@ -100,12 +100,14 @@ height: 1.2em;
     text-align: right;
     background: #FFF;
     width: 9.8em;/*width: 9.2em;*/
+    border: 0px !important;
 }
 
 .cssTdHeaderDerecha .btn_rs {
     display: block;
     height: 3.8em;
     float: left;
+    border: 0px !important;
 }
 
 .cssTdHeaderDerecha .btn_rs .one {
@@ -113,12 +115,14 @@ height: 1.2em;
     width: 4.5em;
     height: 3.8em;
     background-color: #606966;
+    border: 0px !important;
 }
 
 .cssTdHeaderDerecha .btn_rs .two {
     float: left;
     height: 3.8em;
     background-color: #FFF;
+    border: 0px !important;
 }
 
 .cssTdHeaderDerecha .btn_rs .one .left {
@@ -136,6 +140,7 @@ height: 1.2em;
     float: left;
     background-color: #606966;
     padding: 0.5em;
+    border: 0px !important;
 }
 
 .cssTdHeaderDerecha .btn_rs .two .right {
