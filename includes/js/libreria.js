@@ -5,7 +5,7 @@ var startTimeOut = 30;
 var startTime = startTimeOut;
 var t = 0;
 var timeOutCallbacks = [0, 0, 0, 0];
-var appVersion = '2.0';
+var appVersion = '2.1';
 var processFinal = 0;
 
 function getItemApplicationStorage(item_key_value) {
@@ -428,7 +428,7 @@ function CargarVentanaAlerta(pTitulo, pDescripcion) {
 
 function btnCerrarAlertaNotification() {
     $('#divVentanaAlertaContenedorNotification').css('display', 'none');
-    onclickActualizar();
+    //onclickActualizar();
 }
 
 function CargarVentanaAlertaNotification(pTitulo, pDescripcion) {
