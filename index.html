@@ -6,14 +6,12 @@
     <title>AFA</title>
     <link rel="stylesheet" href="includes/css/bootstrap.min.css" />
     <link rel="stylesheet" href="includes/css/swiper.min.css" />
-    <link rel="stylesheet" href="includes/css/web.css" />
-        
+    <link rel="stylesheet" href="includes/css/web.css" />  
 </head>
 <body onresize="onresizeBody()" >
     <div class="container">
         <div id="StatusBar" class="StatusBar"></div>
         <header id="header">
-        
             <table class="cssTablaHeader">
                 <tr>
                     <td>
@@ -24,8 +22,6 @@
                         </div>
                     </td>
                     <td class="cssTdHeaderDerecha">
-                        <!--   onclick="onclickCompartir();"-->
-                        <!--                        <a class="btn_rs" href="#">-->
                         <div class="btn_rs">
                             <div class="one">
                                 <div class="left">
@@ -40,7 +36,6 @@
                                 <img onclick="CargarVentanaAlerta('', getAppVersion());" src="img/material/Logo.svg" alt="afa" class="cssLogoAfa" />
                             </div>
                         </div>
-                        <!--                        </a>-->
                     </td>
                 </tr>
             </table>
@@ -51,7 +46,6 @@
                 Iniciando ...
                 <div id="alertavelocidad" style="width:100%; text-align:center; padding-top:30px; display:none">
                 Su conexi&oacute;n a internet o el servicio de AFA M&oacute;vil est&aacute;n demorando en responder, por favor aguarde un momento.
-                
                 </div>
             </div>
         </div>
@@ -71,7 +65,6 @@
     <div id="divFondoBloqueo">
         <img class="imgFondoBloqueo" src="img/load_fondo_transparente.gif" alt="Cargando" title="Cargando" />
     </div>
-    
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="cordova_plugins.js"></script>    
     <script type="text/javascript" src="includes/js/jquery-2.1.3.min.js"></script>
@@ -84,37 +77,22 @@
     <!--    Inicio Ventana alerta -->
     <div id="divVentanaAlertaContenedor" style="display: none;">
         <div class="center_box">
-            <div id="divVentanaTitulo">
-
-            </div>
-            <div id="divVentanaDescripcio">
-
-            </div>
+            <div id="divVentanaTitulo"></div>
+            <div id="divVentanaDescripcio"></div>
             <div>
                 <input type="button" onclick="btnCerrarAlerta();" value="Cerrar">
             </div>
         </div>
     </div>
     <!--    Fin Ventana alerta-->
-
     <!--    Inicio Ventana alerta Notification-->
     <div id="divVentanaAlertaContenedorNotification" style="display: none;">
         <div class="center_box">
-            <div id="divVentanaTituloNotification">
-
-            </div>
-            <div id="divVentanaDescripcioNotification">
-
-            </div>
-            <div>
-                <input type="button" onclick="btnCerrarAlertaNotification();" value="Cerrar">
-            </div>
+            <div id="divVentanaTituloNotification"></div>
+            <div id="divVentanaDescripcioNotification"></div>
+            <div><input type="button" onclick="btnCerrarAlertaNotification();" value="Cerrar"></div>
         </div>
     </div>
     <!--    Fin Ventana alerta Notification -->
-
-    
-
-    
 </body>
 </html>
