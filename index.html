@@ -1,12 +1,7 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no" />
-    <title>AFA</title>
-    <link rel="stylesheet" href="includes/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="includes/css/swiper.min.css" />
-    <link rel="stylesheet" href="includes/css/web.css" />
+<html>
+  <head>
+    <title>Device Properties Example</title>
 
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
     <script type="text/javascript" charset="utf-8">
@@ -19,67 +14,16 @@
     //
     function onDeviceReady() {
         var element = document.getElementById('deviceProperties');
-        element.innerHTML = 'Device Model: '    + device.model    + '<br />' +
+        element.innerHTML = 'Device UUID: '     + device.uuid     + '<br />' +
+                            'Device Model: '    + device.model    + '<br />' +
                             'Device Cordova: '  + device.cordova  + '<br />' +
-                            'Device Platform: ' + device.platform + '<br />' +
-                            'Device UUID: '     + device.uuid     + '<br />' +
+                            'Device Platform: ' + device.platform + '<br />' +                            
                             'Device Version: '  + device.version  + '<br />';
     }
 
     </script>
-
-
-        
-</head>
-<body onresize="onresizeBody()" >
-
-
-
-
-    
-    <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="cordova_plugins.js"></script>    
-    <script type="text/javascript" src="includes/js/jquery-2.1.3.min.js"></script>
-    <script type="text/javascript" src="includes/js/swiper.min.js"></script>
-    <script type="text/javascript" src="includes/js/bootstrap.min.js"></script>    
-    <script type="text/javascript" src="includes/js/libreria.js"></script>
-    <script type="text/javascript" src="includes/js/cargardatos.js"></script>
-    <script type="text/javascript" src="includes/js/paginaprincipal.js"></script>
-    <script type="text/javascript" src="includes/js/registrarTelefono.js"></script>     
-    <!--    Inicio Ventana alerta -->
-    <div id="divVentanaAlertaContenedor" style="display: none;">
-        <div class="center_box">
-            <div id="divVentanaTitulo">
-
-            </div>
-            <div id="divVentanaDescripcio">
-
-            </div>
-            <div>
-                <input type="button" onclick="btnCerrarAlerta();" value="Cerrar">
-            </div>
-        </div>
-    </div>
-    <!--    Fin Ventana alerta-->
-
-    <!--    Inicio Ventana alerta Notification-->
-    <div id="divVentanaAlertaContenedorNotification" style="display: none;">
-        <div class="center_box">
-            <div id="divVentanaTituloNotification">
-
-            </div>
-            <div id="divVentanaDescripcioNotification">
-
-            </div>
-            <div>
-                <input type="button" onclick="btnCerrarAlertaNotification();" value="Cerrar">
-            </div>
-        </div>
-    </div>
-    <!--    Fin Ventana alerta Notification -->
-
-    
+  </head>
+  <body>
     <p id="deviceProperties">Loading device properties...</p>
-    
-</body>
+  </body>
 </html>

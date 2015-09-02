@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no" />
+    <title>AFA</title>
+    <link rel="stylesheet" href="includes/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="includes/css/swiper.min.css" />
+    <link rel="stylesheet" href="includes/css/web.css" />
+        
+</head>
+<body onresize="onresizeBody()" >
+    <div class="container">
+        <div id="StatusBar" class="StatusBar"></div>
+        <header id="header">
+        
+            <table class="cssTablaHeader">
+                <tr>
+                    <td>
+                        <img src="img/material/icono-actualizar.svg" alt="calendario" class="cssCalendario" onclick="onclickActualizar();" />
+                    </td>
+                    <td>
+                        <div id="headerFecha">
+                        </div>
+                    </td>
+                    <td class="cssTdHeaderDerecha">
+                        <!--   onclick="onclickCompartir();"-->
+                        <!--                        <a class="btn_rs" href="#">-->
+                        <div class="btn_rs">
+                            <div class="one">
+                                <div class="left">
+                                </div>
+                                <div class="center" onclick="onclickCompartir(); shareNuevo();">
+                                    <img src="img/material/icono-compartir.svg" alt="calendario" class="cssIconoCompartir" />
+                                </div>
+                            </div>
+                            <div class="two">
+                                <div class="right">
+                                </div>
+                                <img onclick="CargarVentanaAlerta('', getAppVersion());" src="img/material/Logo.svg" alt="afa" class="cssLogoAfa" />
+                            </div>
+                        </div>
+                        <!--                        </a>-->
+                    </td>
+                </tr>
+            </table>
+        </header>
+        <div id="divCotizacionesDestacada" class="row-xs-6">
+            <div style="width:100%; text-align:center; padding-top:30px;">
+                <img src="img/load_fondo_transparente.gif" width="40px" alt="Cargando" title="Cargando" />
+                Iniciando ...
+                <div id="alertavelocidad" style="width:100%; text-align:center; padding-top:30px; display:none">
+                Su conexi&oacute;n a internet o el servicio de AFA M&oacute;vil est&aacute;n demorando en responder, por favor aguarde un momento.
+                
+                </div>
+            </div>
+        </div>
+        <div id="divButtonAmpliar" onclick="onclickFullScreenButtonAmpliar()">
+            <img src="img/material/ampliar.svg" alt="ampliar" class="cssImgAmpliarParteAbajo" />
+        </div>
+        <div id="divBarraAbajo" class="row-xs-6">
+            <div class="swiper-container">            	
+                <div class="swiper-wrapper">
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="divFondoBloqueo">
+        <img class="imgFondoBloqueo" src="img/load_fondo_transparente.gif" alt="Cargando" title="Cargando" />
+    </div>
+    
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="cordova_plugins.js"></script>    
+    <script type="text/javascript" src="includes/js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="includes/js/swiper.min.js"></script>
+    <script type="text/javascript" src="includes/js/bootstrap.min.js"></script>    
+    <script type="text/javascript" src="includes/js/libreria.js"></script>
+    <script type="text/javascript" src="includes/js/cargardatos.js"></script>
+    <script type="text/javascript" src="includes/js/paginaprincipal.js"></script>
+    <script type="text/javascript" src="includes/js/registrarTelefono.js"></script>     
+    <!--    Inicio Ventana alerta -->
+    <div id="divVentanaAlertaContenedor" style="display: none;">
+        <div class="center_box">
+            <div id="divVentanaTitulo">
+
+            </div>
+            <div id="divVentanaDescripcio">
+
+            </div>
+            <div>
+                <input type="button" onclick="btnCerrarAlerta();" value="Cerrar">
+            </div>
+        </div>
+    </div>
+    <!--    Fin Ventana alerta-->
+
+    <!--    Inicio Ventana alerta Notification-->
+    <div id="divVentanaAlertaContenedorNotification" style="display: none;">
+        <div class="center_box">
+            <div id="divVentanaTituloNotification">
+
+            </div>
+            <div id="divVentanaDescripcioNotification">
+
+            </div>
+            <div>
+                <input type="button" onclick="btnCerrarAlertaNotification();" value="Cerrar">
+            </div>
+        </div>
+    </div>
+    <!--    Fin Ventana alerta Notification -->
+
+    
+
+    
+</body>
+</html>
