@@ -1,6 +1,6 @@
 var random = Math.floor(Math.random() * 1000) + 1 ;
 var idRan = "?idr=" + random;
-var urlxml = "http://movil.afascl.coop/ws/";
+var urlxml = "http://movil.afascl.coop/wsmin/";
 
 /* ESTÁTICO */
 var wsUrlCotizacion = urlxml + "CotizacionCerealPuertoService.xml" + idRan;
